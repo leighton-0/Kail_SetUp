@@ -1,0 +1,221 @@
+#!/bin/bash
+<<comment
+######################################################################
+##              Set Up Script for Kali on Bootable USB               ##
+######################################################################
+
+s=5                  # Slows script down so you can see whats going on.
+
+# make sure we're root
+if [ "$HOME" != "/root" ]
+then
+    printf "Please run while logged in as root\n"
+    exit 1
+fi
+
+printf '\n============================================================\n'
+printf '[+] Updating System\n'
+printf '============================================================\n\n'
+apt update -y && apt upgrade -y
+sleep $s
+
+apt install wget -y
+apt install ruby -y
+apt install git -y
+apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
+gem install wpscan -y                                                               #install wpscan
+wget https://raw.githubusercontent.com/leighton-0/1_auto_wpscan/master/auto_wpscan.sh   #install auto_wpscan
+# wget https://github.yanqishui.work/S1lkys/Auto_wpscan/raw/master/auto_wpscan.sh     #install auto_wpscan
+wget https://raw.githubusercontent.com/S1lkys/Auto_wpscan/master/wp-links           #uploads trial wordpress list (70)
+apt install nmap -y
+wget https://raw.githubusercontent.com/leighton-0/Passwords-Mine/main/password.txt  #upload my password list
+apt install hydra -y                                                                #install Hydra
+apt install whois -y
+apt install dnsutils -y
+apt install flatpak -y
+apt install chrome-gnome-shell -y
+
+printf '\n============================================================\n'
+printf '[+]  Upload standard .bash_aliases & upgrades to .bashrc. \n'
+printf '============================================================\n\n'
+sleep $s
+
+# Back-up original .bashrc in case I Fuck it up
+if [ ! -f ~/.bashrc.bak ]; then                                                      #Check if bashrc.bak has already been copied. If yes then skip
+    cp /root/.bashrc /root/.bashrc.bak                                               # bak Up bashrc incase I fuck it up
+                                                                                     # Upload my standard aliases file
+wget https://raw.githubusercontent.com/leighton-0/2_aliases/master/.bash_aliases
+# Add pointer to new .bash_aliases
+cat <<'EOF' >>.bashrc
+#if [ -f ~/.bash_aliases ]; then
+. ~/.bash_aliases
+#fi
+EOF
+fi
+
+#   copy .bashrc with API keys from andy ssd
+#   cp /media/a/AndySSD/3_Targets/.bashrc /.bashrc DELETE THIS LINE
+cp /media/a/AndySSD/3_Targets/ReconFTW_config_files/.bashrc ~/.bashrc
+
+# enable command aliasing
+shopt -s expand_aliases
+
+# source .bashrc & .bash_aliases
+. .bashrc && . .bash_aliases                
+
+
+
+printf '\n============================================================\n'
+printf '[+] Installing:\n'
+printf '     - wireless drivers\n'
+printf '     - golang & environment\n'
+printf '     - terminator\n'
+printf '     - gedit\n'
+printf '     - htop\n'
+printf '     - mosh\n'
+printf '     - tmux\n'
+printf '     - NFS server\n'
+printf '     - DNS Server\n'
+printf '     - hcxtools (hashcat)\n'
+printf '============================================================\n\n'
+apt-get install \
+    realtek-rtl88xxau-dkms \
+    golang \
+    terminator \
+    gedit -y \
+    python3-dev \
+    python3-pip \
+    net-tools \
+    htop \
+    mosh \
+    tmux \
+    nfs-kernel-server \
+    dnsmasq \
+    hcxtools \
+
+python2 -m pip install pipenv
+python3 -m pip install pipenv
+apt-get remove mitmproxy
+python3 -m pip install mitmproxy
+# default tmux config
+cat <<EOF > "$HOME/.tmux.conf"
+set -g mouse on
+set -g history-limit 50000
+# set second prefix key to "CTRL + A"
+set -g prefix2 C-a
+bind C-a send-prefix -2
+# List of plugins
+set -g @plugin 'tmux-plugins/tmux-logging'
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'
+EOF
+<<comment
+printf '\n============================================================\n'
+    printf '[+] install NordVPN\n'
+    printf '============================================================\n\n'
+wget https://raw.githubusercontent.com/leighton-0/kali-setup/master/nordvpn-release_1.0.0_all.deb
+apt-get install -y ./nordvpn-release_1.0.0_all.deb
+apt-get update
+apt-get install nordvpn
+sleep $s
+comment
+
+printf '\n============================================================\n'
+printf '[+] install NordVPN\n'
+printf '============================================================\n\n'
+if [ ! -f '~/nordvpn*']
+then
+wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+apt install -y ./nordvpn-release_1.0.0_all.deb
+fi
+apt update
+apt install nordvpn
+
+# # COMMENT STARTS ===================THIS SECTION ISN'T WORKING
+# if (1 == 0); then
+#
+# nordvpn login --username leig@clucas.eu --password iloveanna
+# sleep 5
+# #nordvpn connect "#656"
+# #nordvpn -c -n "United States #3710"
+# nordvpn connect --group Dedicated_IP Germany
+# sleep 10
+# nordvpn status
+
+if [ ! -d ~/reconftw ]; then    #Check it Reconftw already exists. If no then loads reconftw program
+
+    printf '\n============================================================\n'
+    printf '\n[+] reconftw doesnt exists installing reconftw\n'
+    printf '============================================================\n\n'
+
+    sleep $s
+    git clone https://github.com/six2dez/reconftw
+    cd reconftw/
+    ./install.sh
+else
+
+  printf '\n============================================================\n'
+  printf '\n[+] reconftw already exists\n'
+  printf '============================================================\n\n'
+
+fi
+sleep $s
+
+  printf '\n============================================================\n'
+  printf '\n[+] install bbot \n'
+   printf '\n[+] reference https://github.com/blacklanternsecurity/bbot \n'
+  printf '============================================================\n\n'
+
+pip install bbot
+# the API keys for this needs obtaining and writing to .bashrc file
+
+<<comment
+printf '\n============================================================\n'
+printf '\n[+] upload custom reconftw.cfg and amass config.ini files\n'
+printf '============================================================\n\n'
+
+sleep $s
+rm -r ~/reconftw/reconftw.cfg 2> /dev/null
+wget -P ~/reconftw https://raw.githubusercontent.com/leighton-0/DigitalOcean-ReconFTW-Set-Up/main/reconftw.cfg
+rm -r ~/.config/amass/config.ini 2> /dev/null
+wget -P ~/.config/amass/ https://raw.githubusercontent.com/leighton-0/DigitalOcean-ReconFTW-Set-Up/main/config.ini
+sleep $s
+comment
+
+ printf '\n============================================================\n'
+    printf '[+] Auto MAC spoof on start up - assuming wlan0\n'
+    printf '============================================================\n\n'
+ #touch /etc/systemd/system/changemac@.service
+wget -P /etc/systemd/system https://raw.githubusercontent.com/leighton-0/kali-setup/master/changemac@.service
+systemctl enable changemac@wlan0.service
+sleep $s
+ printf '\n============================================================\n'
+    printf '[+] Auto Random Host name\n'
+    printf '============================================================\n\n'
+git clone https://github.com/tasooshi/namechanger.git
+cd namechanger
+make install
+sleep $s
+
+  
+   printf '\n============================================================\n'
+    printf '[+] change config file for terminator to 3 pane set up \n'
+    printf '============================================================\n\n'
+rm -r .config/terminator/config
+wget -P '.config/terminator/' https://raw.githubusercontent.com/leighton-0/5_Terminator_config/main/main
+#curl -k -s https://raw.githubusercontent.com/leighton-0/kali-setup/master/kali-setup-script.sh | bash
+sleep $s
+
+<<comment
+not used as the API keys are entered directly into the .bashrc file
+
+   printf '\n============================================================\n'
+    printf '[+] change config file reconFTW to API keys entered \n'
+    printf '============================================================\n\n'
+
+cp /media/a/AndySSD/3_Targets/ReconFTW_config_files/reconftw.cfg ~/reconftw
+
+comment
+
+
+
