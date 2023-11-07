@@ -3,6 +3,8 @@
 ######################################################################
 ##              Set Up Script for Kali on Bootable USB               ##
 ######################################################################
+# This is a set up script for setting up preferred aps on a USB which already has 
+# Kalie instsalled.
 
 s=5                  # Slows script down so you can see whats going on.
 
@@ -19,39 +21,56 @@ printf '============================================================\n\n'
 apt update -y && apt upgrade -y
 sleep $s
 
+
 apt install wget -y
 apt install ruby -y
 apt install git -y
+apt install tmux -y
+git clone https://github.com/towry/tmux-config.git
+./tmux-config/install.sh
 apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
+sleep 5
+apt install nmap -y
+apt install whois -y
+apt install dnsutils -y
+apt install tree
+apt install figlet toilet            # install figlet for banners
+
 gem install wpscan -y                                                               #install wpscan
 wget https://raw.githubusercontent.com/leighton-0/1_auto_wpscan/master/auto_wpscan.sh   #install auto_wpscan
 # wget https://github.yanqishui.work/S1lkys/Auto_wpscan/raw/master/auto_wpscan.sh     #install auto_wpscan
 wget https://raw.githubusercontent.com/S1lkys/Auto_wpscan/master/wp-links           #uploads trial wordpress list (70)
-apt install nmap -y
 wget https://raw.githubusercontent.com/leighton-0/Passwords-Mine/main/password.txt  #upload my password list
 apt install hydra -y                                                                #install Hydra
 apt install whois -y
 apt install dnsutils -y
 apt install flatpak -y
-apt install chrome-gnome-shell -y
 
 printf '\n============================================================\n'
-printf '[+]  Upload standard .bash_aliases & upgrades to .bashrc. \n'
+printf '[+]  Upload my standard .bash_aliases & upgrades to .bashrc. \n'
 printf '============================================================\n\n'
 sleep $s
 
-# Back-up original .bashrc in case I Fuck it up
-if [ ! -f ~/.bashrc.bak ]; then                                                      #Check if bashrc.bak has already been copied. If yes then skip
+if [ ! -f ~/.bashrc.bak ]; then                                                      # Check if bashrc.bak has already been copied. If yes then skip
     cp /root/.bashrc /root/.bashrc.bak                                               # bak Up bashrc incase I fuck it up
-                                                                                     # Upload my standard aliases file
-wget https://raw.githubusercontent.com/leighton-0/2_aliases/master/.bash_aliases
-# Add pointer to new .bash_aliases
-cat <<'EOF' >>.bashrc
-#if [ -f ~/.bash_aliases ]; then
+
+wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases       # Upload my standard aliases file
+
+cat <<"EOF" >>.bashrc                                                                #Add pointer to new .bash_aliases
+if [ -f ~/.bash_aliases ]; then
 . ~/.bash_aliases
-#fi
+fi
 EOF
 fi
+
+. .bashrc && . .bash_aliases
+# ===complete=========
+
+wget https://raw.githubusercontent.com/FreedomBen/digall/main/digall && chmod +x digall
+# installs an automated script for dig
+# Ref:- https://github.com/FreedomBen/digall
+# Use :- ./digall example.com
+# ===complete========= To do - copy repo script to dotfiles
 
 #   copy .bashrc with API keys from andy ssd
 #   cp /media/a/AndySSD/3_Targets/.bashrc /.bashrc DELETE THIS LINE
@@ -109,7 +128,62 @@ set -g @plugin 'tmux-plugins/tmux-logging'
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 EOF
-<<comment
+
+printf '\n============================================================\n'
+printf '[+]  Install nano text editor from binaries. \n'
+printf '============================================================\n\n'
+sleep $s
+
+wget https://www.nano-editor.org/dist/v7/nano-7.2.tar.gz
+tar -zxvf nano-7.2.tar.gz
+cd nano-7.2
+sudo apt install libncurses-dev
+./configure
+make
+make install
+# set up colour text ref:- https://askubuntu.com/questions/90013/how-do-i-enable-syntax-highlighting-in-nano
+find /usr/share/nano/ -iname "*.nanorc" -exec echo include {} \; >> ~/.nanorc
+
+printf '\n============================================================\n'
+printf '[+]  Install docker \n'
+print '[+] link --> https://docs.docker.com/engine/install/debian/#install-using-the-repository \n'
+printf '============================================================\n\n'
+sleep $s
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+# install docker package
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Verify that the installation is successful by running the hello-world image:
+docker run hello-world
+
+printf '\n============================================================\n'
+printf '[+]  Install golang 1.21.1 \n'
+printf '============================================================\n\n'
+sleep $s
+# ref:- https://www.digitalocean.com/community/tutorials/how-to-install-go-on-debian-10
+curl -O https://dl.google.com/go/go1.21.1.linux-amd64.tar.gz
+tar xvf go1.21.1.linux-amd64.tar.gz
+chown -R root:root ./go
+mv go /usr/local
+echo "export GOPATH=$HOME/work" >> ~/.profile
+echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin" >> ~/.profile
+source ~/.profile
+
+<< 'MULTILINE-COMMENT'
 printf '\n============================================================\n'
     printf '[+] install NordVPN\n'
     printf '============================================================\n\n'
@@ -118,7 +192,7 @@ apt-get install -y ./nordvpn-release_1.0.0_all.deb
 apt-get update
 apt-get install nordvpn
 sleep $s
-comment
+MULTILINE-COMMENT
 
 printf '\n============================================================\n'
 printf '[+] install NordVPN\n'
@@ -142,6 +216,7 @@ apt install nordvpn
 # sleep 10
 # nordvpn status
 
+<< 'MULTILINE-COMMENT'
 if [ ! -d ~/reconftw ]; then    #Check it Reconftw already exists. If no then loads reconftw program
 
     printf '\n============================================================\n'
@@ -181,6 +256,7 @@ rm -r ~/.config/amass/config.ini 2> /dev/null
 wget -P ~/.config/amass/ https://raw.githubusercontent.com/leighton-0/DigitalOcean-ReconFTW-Set-Up/main/config.ini
 sleep $s
 comment
+MULTILINE-COMMENT
 
  printf '\n============================================================\n'
     printf '[+] Auto MAC spoof on start up - assuming wlan0\n'
