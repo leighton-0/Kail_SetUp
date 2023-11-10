@@ -10,6 +10,8 @@
 #   need to first install curl ==> apt install curl  # this is probably already on?
 #   then
 #   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main_1 | bash
+#   install using -->> wget curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main_1 && chmod +x main_1
+#   Run using ./main_1
 
 s=5                  # Slows script down so you can see whats going on.
 
@@ -77,9 +79,9 @@ mount /dev/sdb3 /mnt/my_usb
 echo "/ union" > /mnt/my_usb/persistence.conf
 umount /dev/sdb3
 
-
-
 reboot
+
+# wget the autoexpect file now that we have persistence
 
 printf '\n============================================================\n'
 printf '[+] change shell from zsh to bash \n'
