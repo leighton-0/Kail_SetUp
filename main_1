@@ -17,6 +17,14 @@ s=5                  # Slows script down so you can see whats going on.
 # assume you have to change shell --> add persistece --> reboot & cnange shell again
 
 printf '\n============================================================\n'
+printf '[+] move to root \n'
+printf '============================================================\n\n'
+sudo bash
+cd ~
+whoami
+sleep 10
+
+printf '\n============================================================\n'
 printf '[+] change shell from zsh to bash \n'
 printf '============================================================\n\n'
 sleep $s
