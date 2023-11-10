@@ -21,8 +21,8 @@ printf '[+] move to root \n'
 printf '============================================================\n\n'
 sudo bash
 cd ~
-printf "Presently logged in as"  whoami
-printf "Present working directory is" pwd
+printf "Presently logged in as - %s\n"  "whoami"
+printf "Present working directory is - %s\n" "pwd"
 sleep 10
 
 printf '\n============================================================\n'
