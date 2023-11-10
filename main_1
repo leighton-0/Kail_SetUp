@@ -22,7 +22,7 @@ printf '============================================================\n\n'
 sudo bash
 cd ~
 printf "Presently nlogged in as"  whoami
-print f "present working directory is" pwd
+printf "Present working directory is" pwd
 sleep 10
 
 printf '\n============================================================\n'
