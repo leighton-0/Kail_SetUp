@@ -1,0 +1,8 @@
+#!/usr/bin/expect -f
+#
+spawn ./main_1.2.sh
+expect "New password\r"
+send -- "toor\r"
+expect "Retype new password:\r"
+send -- "toor\r"
+expect eof
