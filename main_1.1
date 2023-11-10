@@ -7,6 +7,7 @@
 # basic Kalie installed - without persistence.
 
 # to install:-
+#   change to root user using -->> sudo bash && cd ~
 #   need to first install curl ==> apt install curl  # this is probably already on?
 #   then
 #   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main_1 | bash
@@ -18,6 +19,7 @@ s=5                  # Slows script down so you can see whats going on.
 # will the persistence script below work in zsh (defalt kali shiell)
 # assume you have to change shell --> add persistece --> reboot & cnange shell again
 
+<< 'MULTILINE-COMMENT'
 printf '\n============================================================\n'
 printf '[+] Change to root \n'
 printf '============================================================\n\n'
@@ -29,6 +31,7 @@ whoami
 printf "Present working directory is - %s\n" pwd
 pwd
 sleep 10
+MULTILINE-COMMENT
 
 printf '\n============================================================\n'
 printf '[+] change shell from zsh to bash \n'
