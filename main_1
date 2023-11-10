@@ -21,7 +21,7 @@ printf '[+] move to root \n'
 printf '============================================================\n\n'
 sudo bash
 cd ~
-printf "Presently nlogged in as"  whoami
+printf "Presently logged in as"  whoami
 printf "Present working directory is" pwd
 sleep 10
 
@@ -29,11 +29,10 @@ printf '\n============================================================\n'
 printf '[+] change shell from zsh to bash \n'
 printf '============================================================\n\n'
 sleep $s
-
 printf "My current shell - %s\n" "$SHELL"
 chsh -s /bin/bash                         ## change to bash to bash shell ##
 printf "My current shell in now - %s\n" "$SHELL"
-
+sleep 10
 printf '\n============================================================\n'
 printf '[+] Set Up Persistence on Kali\n'
 printf '============================================================\n\n'
