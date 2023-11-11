@@ -16,43 +16,7 @@ s=5                  # Slows script down so you can see whats going on.
 # will the persistence script below work in zsh (defalt kali shiell)
 # assume you have to change shell --> add persistece --> reboot & cnange shell again
 
-printf '\n============================================================\n'
-printf '[+] change shell from zsh to bash \n'
-printf '============================================================\n\n'
-sleep $s
 
-printf "My current shell - %s\n" "$SHELL"
-chsh -s /bin/bash                         ## change to bash to bash shell ##
-printf "My current shell in now - %s\n" "$SHELL"
-
-printf '\n============================================================\n'
-printf '[+] Set Up Persistence on Kali\n'
-printf '============================================================\n\n'
-sleep $s
-# ==create a partition above the Kali Live partitions==
-sudo fdisk -l
-sleep 10
-printf '\n=================\n'
-end=7GiB
-read start _ < <(du -bcm kali-linux-2021.1-live-arm64.iso | tail -1); echo $start
-parted /dev/sdb mkpart primary ${start}MiB $end
-sudo fdisk -l
-sleep 20
-
-#  ==to create an ext3 file system labeled "persistence."==
-mkfs.ext3 -L persistence /dev/sdb3
-e2label /dev/sdb3 persistence
-
-# create a mount point, 
-# mount the new partition there, 
-# create a configuration file to enable persistence, then 
-# unmount the partition.
-mkdir -p /mnt/my_usb
-mount /dev/sdb3 /mnt/my_usb
-echo "/ union" > /mnt/my_usb/persistence.conf
-umount /dev/sdb3
-
-reboot
 
 printf '\n============================================================\n'
 printf '[+] change shell from zsh to bash \n'
