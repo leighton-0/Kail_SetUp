@@ -48,12 +48,12 @@ cat <<EOF >/etc/apt/sources.list
 deb https://http.kali.org/kali kali-rolling main non-free contrib
 EOF
 
-compute_start_time(){
+compute_start_time() {
     start_time=$(date +%s)
     echo "\n\n Install started - $start_time \n" >> script.log
 }
 
-configure_environment(){
+configure_environment() {
     echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
 }
 
@@ -83,7 +83,7 @@ install_kernel_headers() {
     fi
 }
 
-install_base_os_tools(){
+install_base_os_tools() {
     printf "  ⏳  Installing base os tools programs\n" | tee -a script.log
     # sshfs - mount file system over ssh
     # nfs-common - 
@@ -100,7 +100,7 @@ install_base_os_tools(){
     done 
 }
 # ======added by me ======
-install_nano(){
+install_nano() {
     printf "  ⏳  Installing nano from binaries\n" | tee -a script.log
     # install nano from binaries
     wget https://www.nano-editor.org/dist/v7/nano-7.2.tar.gz
@@ -126,7 +126,7 @@ install_slack() {
     rm -f ./slack-desktop*
 }
 
-install_docker(){
+install_docker() {
     printf "  ⏳  Installing docker\n" | tee -a script.log
     curl -fsSL --silent https://download.docker.com/linux/debian/gpg | sudo apt-key add - >> script.log 2>>script_error.log
     if [[ $? != 0 ]]; then
@@ -148,7 +148,7 @@ install_docker(){
         echo "$1 failed " >> script.log
     fi
 }
-pull_cyberchef(){
+pull_cyberchef() {
     printf "  ⏳  Install cyberchef docker container\n" | tee -a script.log
     docker pull remnux/cyberchef >> script.log 2>>script_error.log
     if [[ $? != 0 ]]; then
@@ -162,7 +162,7 @@ pull_cyberchef(){
     echo "# docker stop <container id>" >> script_todo.log  
 }
 
-install_chrome(){
+install_chrome() {
     printf "  ⏳  Install Chrome\n" | tee -a script.log
     wget --quiet https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     if [[ $? != 0 ]]; then
@@ -179,7 +179,7 @@ install_chrome(){
     echo "alias chrome='google-chrome-stable --no-sandbox file:///root/dev/start_page/index.html'" >> /root/.bashrc
 }
 
-install_chromium(){
+install_chromium() {
     printf "  ⏳  Install Chromium\n" | tee -a script.log
     apt_package_install chromium
     echo "# simply override settings above" >> /etc/chromium/default
@@ -196,7 +196,7 @@ bash_aliases() {
     sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
 }
 
-unzip_rockyou(){
+unzip_rockyou() {
     printf "  ⏳  Install gunzip rockyou\n" | tee -a script.log
     cd /usr/share/wordlists/
     gunzip -q /usr/share/wordlists/rockyou.txt.gz
@@ -207,12 +207,12 @@ unzip_rockyou(){
     cd /root
 }
 
-enable_auto_login_gnome(){
+enable_auto_login_gnome() {
     printf "  🔧  enabling autologin\n" | tee -a script.log
     sed -i "s/^#.*AutomaticLoginEnable/AutomaticLoginEnable/g ; s/#.*AutomaticLogin/AutomaticLogin/g" /etc/gdm3/daemon.conf
 }
 
-configure_wireshark(){
+configure_wireshark() {
     printf "  🔧  configure wireshark\n" | tee -a script.log
     cd /root
     mkdir -p /root/.config/wireshark
@@ -255,14 +255,14 @@ configure_wireshark(){
 	ENDOFWIRESHARK
 }
 
-add_repos_sources(){
+add_repos_sources() {
     printf "  🔧  add additional repo sources\n" | tee -a script.log
     cd /etc/apt/sources.list.d
     wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/add_sources.list
     cd ~
 }
 
-build_transmission(){
+build_transmission() {
     printf "  🔧  install transmission\n" | tee -a script.log
     apt install transmission
 }
@@ -283,6 +283,7 @@ nordvpn(){
     nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e
     nordvpn connect Double VPN
     nordvpn s killswitch on
+}
     
 
 # ======finish added by me ======
