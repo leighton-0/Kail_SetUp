@@ -138,7 +138,7 @@ install_auto_mac_spoof(){
     systemctl enable changemac@wlan0.service
 }
 
-install_Auto Random Host name(){
+Auto_Random_Host_name(){
     printf "  ⏳  install_Auto Random Host name\n" | tee -a script.log
     git clone https://github.com/tasooshi/namechanger.git
     cd namechanger
@@ -673,7 +673,7 @@ main () {
     #nordvpn
     #install_add_WP_recon
     #install_auto_mac_spoof -->> not working needs attention
-    #install_Auto Random Host name
+    #Auto_Random_Host_name
     #terminator
 
 }
