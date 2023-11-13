@@ -1,6 +1,7 @@
 #!/bin/bash
 # cloned from st3rven/kali_setup
 chsh -s /bin/bash    # added by me
+# run as root -->> sudo su
  
 # icons
 # ❌⏳💀🎉 ℹ️ ⚠️ 🚀 ✅ ♻ 🚮 🛡 🔧  ⚙ 
