@@ -7,5 +7,5 @@ ss
 run as root -->> sudo su
 
 ```
-curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main | bash
+curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh | bash
 ```
