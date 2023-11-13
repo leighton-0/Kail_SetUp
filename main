@@ -245,9 +245,9 @@ bash_aliases() {
     wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases
     #Add pointer to new .bash_aliases
     cat <<"EOF" >>.bashrc
-        if [ -f ~/.bash_aliases ]; then
-        . ~/.bash_aliases
-        fi
+    if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+    fi
     EOF
     fi
     # tmux source-file ~/.tmux.conf                                      # source .tmux.conf
