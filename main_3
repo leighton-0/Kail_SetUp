@@ -587,8 +587,8 @@ main () {
     #install_opera
     #install_mega
     install_stegcracker
-    install_nmap_vulscan
-    install_metapackage
+    #install_nmap_vulscan
+    #install_metapackage
     #john_bash_completion
     #configure_metasploit
     fix_kali
@@ -597,16 +597,18 @@ main () {
     compute_finish_time
     script_todo_print
     install_nano          # added by me
-    install_slack
-    install_docker        # add by me
-    pull_cyberchef
-    install_chrome
-    install_chromium
+    #install_slack
+    #install_docker        # add by me
+    #pull_cyberchef
+    #install_chrome
+    #install_chromium
     bash_aliases
-    unzip_rockyou
-    enable_auto_login_gnome
-    build_transmission
+    #unzip_rockyou
+    #enable_auto_login_gnome
     add_repos_sources
+    apt_update
+    apt_upgrade
+    build_transmission
     nordvpn
 
 }
