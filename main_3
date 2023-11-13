@@ -186,6 +186,99 @@ install_chromium(){
     echo 'CHROMIUM_FLAGS="--password-store=detect --user-data-dir"' >> /etc/chromium/default
 }
 
+bash_aliases() {
+    printf "  ⏳  adding bash aliases\n" | tee -a script.log
+    # git aliases
+    echo "alias gs='git status'" >> /root/.bashrc
+    echo "alias ga='git add -A'" >> /root/.bashrc
+    echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
+    # increase history size
+    sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
+}
+
+unzip_rockyou(){
+    printf "  ⏳  Install gunzip rockyou\n" | tee -a script.log
+    cd /usr/share/wordlists/
+    gunzip -q /usr/share/wordlists/rockyou.txt.gz
+    if [[ $? != 0 ]]; then
+	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
+        echo "$1 failed " >> script.log
+    fi
+    cd /root
+}
+
+enable_auto_login_gnome(){
+    printf "  🔧  enabling autologin\n" | tee -a script.log
+    sed -i "s/^#.*AutomaticLoginEnable/AutomaticLoginEnable/g ; s/#.*AutomaticLogin/AutomaticLogin/g" /etc/gdm3/daemon.conf
+}
+
+configure_wireshark(){
+    printf "  🔧  configure wireshark\n" | tee -a script.log
+    cd /root
+    mkdir -p /root/.config/wireshark
+    cat > /root/.config/wireshark/preferences <<-ENDOFWIRESHARK
+    # Default capture device
+    # A string
+    capture.device: eth0
+
+    # Scroll packet list during capture?
+    # TRUE or FALSE (case-insensitive)
+    capture.auto_scroll: FALSE
+
+    # Resolve addresses to names?
+    # TRUE or FALSE (case-insensitive), or a list of address types to resolve.
+    name_resolve: FALSE
+
+    # Resolve Ethernet MAC address to manufacturer names
+    # TRUE or FALSE (case-insensitive)
+    nameres.mac_name: FALSE
+
+    # Resolve TCP/UDP ports into service names
+    # TRUE or FALSE (case-insensitive)
+    nameres.transport_name: FALSE
+
+    # Capture in Pcap-NG format?
+    # TRUE or FALSE (case-insensitive)
+    capture.pcap_ng: FALSE
+
+    # Font name for packet list, protocol tree, and hex dump panes.
+    # A string
+    gui.qt.font_name: Monospace,10,-1,5,50,0,0,0,0,0
+
+    # Resolve addresses to names?
+    # TRUE or FALSE (case-insensitive), or a list of address types to resolve.
+    name_resolve: FALSE
+
+    # Display all hidden protocol items in the packet list.
+    # TRUE or FALSE (case-insensitive)
+    protocols.display_hidden_proto_items: TRUE
+	ENDOFWIRESHARK
+}
+
+build_transmission(){
+    << 'MULTILINE-COMMENT'
+    tar xf transmission-4.0.4.tar.xz
+    cd transmission-4.0.4
+    Use -DCMAKE_BUILD_TYPE=RelWithDebInfo to build optimized binary with debug information. (preferred)
+    Use -DCMAKE_BUILD_TYPE=Release to build full optimized binary.
+    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cd build
+    cmake --build .
+    sudo cmake --install .
+    MULTILINE-COMMENT
+    git clone --recurse-submodules https://github.com/transmission/transmission Transmission
+    cd Transmission
+    Use -DCMAKE_BUILD_TYPE=RelWithDebInfo to build optimized binary with debug information. (preferred)
+    Use -DCMAKE_BUILD_TYPE=Release to build full optimized binary.
+    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cd build
+    cmake --build .
+    sudo cmake --install .
+}
+
+
+
+
 
 
 
@@ -508,6 +601,10 @@ main () {
     pull_cyberchef
     install_chrome
     install_chromium
+    bash_aliases
+    unzip_rockyou
+    enable_auto_login_gnome
+    build_transmission
 
 }
 
