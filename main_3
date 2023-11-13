@@ -277,7 +277,12 @@ build_transmission(){
     sudo cmake --install .
 }
 
-
+add_repos_sources(){
+    printf "  🔧  add additional repo sources\n" | tee -a script.log
+    cd /etc/apt/sources.list.d
+    wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/add_sources.list
+    cd ~
+}
 
 
 
@@ -606,6 +611,7 @@ main () {
     unzip_rockyou
     enable_auto_login_gnome
     build_transmission
+    add_repos_sources
 
 }
 
