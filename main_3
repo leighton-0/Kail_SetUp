@@ -148,6 +148,45 @@ install_docker(){
         echo "$1 failed " >> script.log
     fi
 }
+pull_cyberchef(){
+    printf "  ⏳  Install cyberchef docker container\n" | tee -a script.log
+    docker pull remnux/cyberchef >> script.log 2>>script_error.log
+    if [[ $? != 0 ]]; then
+	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
+        echo "$1 failed " >> script.log
+    fi
+    echo "# Run docker cyberchef" >> script_todo.log  
+    echo "# docker run -d -p 8080:8080 remnux/cyberchef" >> script_todo.log  
+    echo "# http://localhost:8080/" >> script_todo.log  
+    echo "# docker ps" >> script_todo.log  
+    echo "# docker stop <container id>" >> script_todo.log  
+}
+
+install_chrome(){
+    printf "  ⏳  Install Chrome\n" | tee -a script.log
+    wget --quiet https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    if [[ $? != 0 ]]; then
+	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
+        echo "$1 failed " >> script.log
+    fi  
+    dpkg -i ./google-chrome-stable_current_amd64.deb >> script.log
+    apt --fix-broken install -y
+    rm -f ./google-chrome-stable_current_amd64.deb
+    # enable chrome start as root
+    cp /usr/bin/google-chrome-stable /usr/bin/google-chrome-stable.old && sed -i 's/^\(exec.*\)$/\1 --user-data-dir/' /usr/bin/google-chrome-stable
+    sed -i -e 's@Exec=/usr/bin/google-chrome-stable %U@Exec=/usr/bin/google-chrome-stable %U --no-sandbox@g' /usr/share/applications/google-chrome.desktop 
+    # chrome alias
+    echo "alias chrome='google-chrome-stable --no-sandbox file:///root/dev/start_page/index.html'" >> /root/.bashrc
+}
+
+install_chromium(){
+    printf "  ⏳  Install Chromium\n" | tee -a script.log
+    apt_package_install chromium
+    echo "# simply override settings above" >> /etc/chromium/default
+    echo 'CHROMIUM_FLAGS="--password-store=detect --user-data-dir"' >> /etc/chromium/default
+}
+
+
 
 
 
@@ -466,6 +505,9 @@ main () {
     install_nano          # added by me
     install_slack
     install_docker        # add by me
+    pull_cyberchef
+    install_chrome
+    install_chromium
 
 }
 
