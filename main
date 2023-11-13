@@ -661,7 +661,7 @@ main () {
     #manual_stuff_to_do
     compute_finish_time
     script_todo_print
-    install_nano          # added by me
+    #install_nano          # added by me
     add_repos_sources
     #install_slack
     #install_docker        # add by me
@@ -674,11 +674,11 @@ main () {
     apt_update
     apt_upgrade
     #build_transmission
-    nordvpn
+    #nordvpn
     #install_add_WP_recon
     #install_auto_mac_spoof -->> not working needs attention
-    install_Auto Random Host name
-    terminator
+    #install_Auto Random Host name
+    #terminator
 
 }
 
