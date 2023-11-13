@@ -131,7 +131,7 @@ terminator(){
 
 
 
-install_auto_mac_spoof(){
+auto_mac_spoof(){
     printf "  ⏳  Auto MAC spoof on start up - assuming wlan0\n" | tee -a script.log
     #touch /etc/systemd/system/changemac@.service
     wget -P /etc/systemd/system https://raw.githubusercontent.com/leighton-0/kali-setup/master/changemac@.service
@@ -672,7 +672,7 @@ main () {
     #build_transmission
     #nordvpn
     #install_add_WP_recon
-    #install_auto_mac_spoof -->> not working needs attention
+    #auto_mac_spoof -->> not working needs attention
     #Auto_Random_Host_name
     #terminator
 
