@@ -653,11 +653,11 @@ main () {
     #install_metapackage
     #john_bash_completion
     #configure_metasploit
-    fix_kali
-    additional_clean
+    ##fix_kali
+    ##additional_clean
     #manual_stuff_to_do
-    compute_finish_time
-    script_todo_print
+    ##compute_finish_time
+    ##script_todo_print
     #install_nano          # added by me
     add_repos_sources
     #install_slack
@@ -676,6 +676,11 @@ main () {
     #auto_mac_spoof -->> not working needs attention
     #Auto_Random_Host_name
     #terminator
+    fix_kali
+    additional_clean
+    #manual_stuff_to_do
+    compute_finish_time
+    script_todo_print
 
 }
 
