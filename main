@@ -129,8 +129,6 @@ terminator(){
     #curl -k -s https://raw.githubusercontent.com/leighton-0/kali-setup/master/kali-setup-script.sh | bash
 }
 
-
-
 auto_mac_spoof(){
     printf "  ⏳  Auto MAC spoof on start up - assuming wlan0\n" | tee -a script.log
     #touch /etc/systemd/system/changemac@.service
@@ -149,7 +147,6 @@ Auto_Random_Host_name(){
 install_add_WP_recon(){
     printf "  ⏳  Installing WP recon scripts\n" | tee -a script.log
     wget https://raw.githubusercontent.com/leighton-0/1_auto_wpscan/master/auto_wpscan.sh   #install auto_wpscan
-
 }
 
 install_nano() {
@@ -200,6 +197,7 @@ install_docker() {
         echo "$1 failed " >> script.log
     fi
 }
+
 pull_cyberchef() {
     printf "  ⏳  Install cyberchef docker container\n" | tee -a script.log
     docker pull remnux/cyberchef >> script.log 2>>script_error.log
@@ -244,13 +242,13 @@ bash_aliases() {
     cp /root/.bashrc /root/.bashrc.bak                       # bak Up bashrc incase I fuck it up
     wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases
     #Add pointer to new .bash_aliases
-    cat <<"EOF" >>.bashrc
+    cat <<EOF >>.bashrc
     if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
     fi
     EOF
     fi
-    # tmux source-file ~/.tmux.conf                                      # source .tmux.conf
+    # tmux source-file ~/.tmux.conf                                      # source .tmux.conf needs moving
     . .bashrc && . .bash_aliases                                         #source .bashrc & .bash_aliases
     echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
     # increase history size
