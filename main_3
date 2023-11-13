@@ -260,8 +260,8 @@ build_transmission(){
 
     tar xf transmission-4.0.4.tar.xz
     cd transmission-4.0.4
-    Use -DCMAKE_BUILD_TYPE=RelWithDebInfo to build optimized binary with debug information. (preferred)
-    Use -DCMAKE_BUILD_TYPE=Release to build full optimized binary.
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo # to build optimized binary with debug information. (preferred)
+    #Use -DCMAKE_BUILD_TYPE=Release to build full optimized binary.
     cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
     cd build
     cmake --build .
