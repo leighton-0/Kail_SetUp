@@ -116,10 +116,10 @@ add_repos_sources() {
     apt update -y
 }
 
-dpkg --configure -a
-apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
-apt install dnsutils -y
-apt install flatpak -y
+#dpkg --configure -a
+#apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
+#apt install dnsutils -y
+#apt install flatpak -y
 
 terminator(){
     printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
