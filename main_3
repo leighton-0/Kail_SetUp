@@ -255,28 +255,6 @@ configure_wireshark(){
 	ENDOFWIRESHARK
 }
 
-build_transmission(){
-
-
-    tar xf transmission-4.0.4.tar.xz
-    cd transmission-4.0.4
-    -DCMAKE_BUILD_TYPE=RelWithDebInfo # to build optimized binary with debug information. (preferred)
-    #Use -DCMAKE_BUILD_TYPE=Release to build full optimized binary.
-    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cd build
-    cmake --build .
-    sudo cmake --install .
-   
-    git clone --recurse-submodules https://github.com/transmission/transmission Transmission
-    cd Transmission
-    Use -DCMAKE_BUILD_TYPE=RelWithDebInfo to build optimized binary with debug information. (preferred)
-    Use -DCMAKE_BUILD_TYPE=Release to build full optimized binary.
-    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cd build
-    cmake --build .
-    sudo cmake --install .
-}
-
 add_repos_sources(){
     printf "  🔧  add additional repo sources\n" | tee -a script.log
     cd /etc/apt/sources.list.d
@@ -284,11 +262,28 @@ add_repos_sources(){
     cd ~
 }
 
+build_transmission(){
+    printf "  🔧  install transmission\n" | tee -a script.log
+    apt install transmission
+}
 
 
 
-
-
+nordvpn(){
+    printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
+    if [ ! -f '~/nordvpn*']
+    then
+    wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+    apt install -y ./nordvpn-release_1.0.0_all.deb
+    fi
+    apt update
+    apt install nordvpn
+    # token 30 day expiring - 11 December
+    # e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
+    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
+    nordvpn connect Double VPN
+    nordvpn s killswitch on
+    
 
 # ======finish added by me ======
 
@@ -612,6 +607,7 @@ main () {
     enable_auto_login_gnome
     build_transmission
     add_repos_sources
+    nordvpn
 
 }
 
