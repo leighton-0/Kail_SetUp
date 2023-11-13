@@ -267,7 +267,14 @@ build_transmission(){
     cmake --build .
     sudo cmake --install .
    
-
+    git clone --recurse-submodules https://github.com/transmission/transmission Transmission
+    cd Transmission
+    Use -DCMAKE_BUILD_TYPE=RelWithDebInfo to build optimized binary with debug information. (preferred)
+    Use -DCMAKE_BUILD_TYPE=Release to build full optimized binary.
+    cmake -B build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cd build
+    cmake --build .
+    sudo cmake --install .
 }
 
 
