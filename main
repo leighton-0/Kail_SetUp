@@ -1,17 +1,13 @@
 #!/bin/bash
 # cloned from st3rven/kali_setup
 # to install:-
-#   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main_3 | bash
-#   or
-#   install using -->> wget https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main_1.1 && chmod +x main_1.1
-#   Run using ./main_1.1
+#   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main | bash
 
 s=5                  # Slows script down so you can see whats going on.
 
-
 chsh -s /bin/bash    # added by me
 # run as root -->> sudo su
-sudo su
+# sudo su
  
 # icons
 # ❌⏳💀🎉 ℹ️ ⚠️ 🚀 ✅ ♻ 🚮 🛡 🔧  ⚙ 
@@ -19,7 +15,7 @@ sudo su
 # run update and upgrade, before running script
 # apt update && apt upgrade -y
 ## curl -L --silent https://bit.ly/31BE8PI <user> | bash
-#
+
 # set -x
 # user input
 
