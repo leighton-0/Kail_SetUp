@@ -109,11 +109,20 @@ add_repos_sources() {
     apt update -y
 }
 
-
 dpkg --configure -a
 apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
 apt install dnsutils -y
 apt install flatpak -y
+
+terminator(){
+    printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
+    apt install terminator
+    rm -r .config/terminator/config
+    wget -P '.config/terminator/' https://raw.githubusercontent.com/leighton-0/5_Terminator_config/main/main
+    #curl -k -s https://raw.githubusercontent.com/leighton-0/kali-setup/master/kali-setup-script.sh | bash
+}
+
+
 
 install_auto_mac_spoof(){
     printf "  ⏳  Auto MAC spoof on start up - assuming wlan0\n" | tee -a script.log
@@ -653,11 +662,12 @@ main () {
     #enable_auto_login_gnome
     apt_update
     apt_upgrade
-    build_transmission
+    #build_transmission
     nordvpn
     #install_add_WP_recon
     install_auto_mac_spoof
     install_Auto Random Host name
+    terminator
 
 }
 
