@@ -666,7 +666,7 @@ main () {
     #build_transmission
     nordvpn
     #install_add_WP_recon
-    install_auto_mac_spoof
+    #install_auto_mac_spoof -->> not working needs attention
     install_Auto Random Host name
     terminator
 
