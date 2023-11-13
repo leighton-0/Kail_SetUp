@@ -603,7 +603,7 @@ main () {
     #pull_cyberchef
     #install_chrome
     #install_chromium
-    bash_aliases
+    #bash_aliases
     #unzip_rockyou
     #enable_auto_login_gnome
     add_repos_sources
