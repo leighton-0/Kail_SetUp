@@ -92,6 +92,8 @@ install_kernel_headers() {
 
 install_base_os_tools() {
     printf "  ⏳  Installing base os tools programs\n" | tee -a script.log
+    # strace
+    # ltrace
     # sshfs - mount file system over ssh
     # nfs-common - 
     # sshuttle - VPN/proxy over ssh 
