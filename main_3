@@ -188,22 +188,18 @@ install_chromium() {
 
 bash_aliases() {
     printf "  ⏳  adding bash aliases\n" | tee -a script.log
-    # Back-up original .bashrc incase I Fuck it up
-    if [ ! -f ~/.bashrc.bak ]; then                                                      #Check if bashrc.bak has already been copied. If yes then skip
-    cp /root/.bashrc /root/.bashrc.bak                                               # bak Up bashrc incase I fuck it up
-
-                                                                                     # Upload my standard aliases file
+    if [ ! -f ~/.bashrc.bak ]; then           #Check if bashrc.bak has already been copied. If yes then skip
+    cp /root/.bashrc /root/.bashrc.bak                       # bak Up bashrc incase I fuck it up
     wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases
-
-                                                                                     #Add pointer to new .bash_aliases
+    #Add pointer to new .bash_aliases
     cat <<"EOF" >>.bashrc
-    if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-    fi
+        if [ -f ~/.bash_aliases ]; then
+        . ~/.bash_aliases
+        fi
     EOF
     fi
-    tmux source-file ~/.tmux.conf                                                       # source .tmux.conf
-    . .bashrc && . .bash_aliases                                                         #source .bashrc & .bash_aliases
+    # tmux source-file ~/.tmux.conf                                      # source .tmux.conf
+    . .bashrc && . .bash_aliases                                         #source .bashrc & .bash_aliases
     echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
     # increase history size
     sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
