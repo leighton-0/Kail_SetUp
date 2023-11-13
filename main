@@ -235,14 +235,14 @@ install_chromium() {
     echo "# simply override settings above" >> /etc/chromium/default
     echo 'CHROMIUM_FLAGS="--password-store=detect --user-data-dir"' >> /etc/chromium/default
 }
-
+<<comment
 bash_aliases() {
     printf "  ⏳  adding bash aliases\n" | tee -a script.log
     if [ ! -f ~/.bashrc.bak ]; then           #Check if bashrc.bak has already been copied. If yes then skip
     cp /root/.bashrc /root/.bashrc.bak                       # bak Up bashrc incase I fuck it up
     wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases
     #Add pointer to new .bash_aliases
-    cat <<EOF >>.bashrc
+    cat <<'EOF' >>.bashrc
     if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
     fi
@@ -254,7 +254,7 @@ bash_aliases() {
     # increase history size
     sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
 }
-
+comment
 unzip_rockyou() {
     printf "  ⏳  Install gunzip rockyou\n" | tee -a script.log
     cd /usr/share/wordlists/
