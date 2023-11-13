@@ -100,6 +100,41 @@ install_base_os_tools() {
     done 
 }
 # ======added by me ======
+
+add_repos_sources() {
+    printf "  🔧  add additional repo sources\n" | tee -a script.log
+    cd /etc/apt/sources.list.d
+    wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/add_sources.list
+    cd ~
+    apt update -y
+}
+
+
+dpkg --configure -a
+apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
+apt install dnsutils -y
+apt install flatpak -y
+
+install_auto_mac_spoof(){
+    printf "  ⏳  Auto MAC spoof on start up - assuming wlan0\n" | tee -a script.log
+    #touch /etc/systemd/system/changemac@.service
+    wget -P /etc/systemd/system https://raw.githubusercontent.com/leighton-0/kali-setup/master/changemac@.service
+    systemctl enable changemac@wlan0.service
+}
+
+install_Auto Random Host name(){
+    printf "  ⏳  install_Auto Random Host name\n" | tee -a script.log
+    git clone https://github.com/tasooshi/namechanger.git
+    cd namechanger
+    make install
+}
+
+install_add_WP_recon(){
+    printf "  ⏳  Installing WP recon scripts\n" | tee -a script.log
+    wget https://raw.githubusercontent.com/leighton-0/1_auto_wpscan/master/auto_wpscan.sh   #install auto_wpscan
+
+}
+
 install_nano() {
     printf "  ⏳  Installing nano from binaries\n" | tee -a script.log
     # install nano from binaries
@@ -264,12 +299,6 @@ configure_wireshark() {
 	ENDOFWIRESHARK
 }
 
-add_repos_sources() {
-    printf "  🔧  add additional repo sources\n" | tee -a script.log
-    cd /etc/apt/sources.list.d
-    wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/add_sources.list
-    cd ~
-}
 
 build_transmission() {
     printf "  🔧  install transmission\n" | tee -a script.log
@@ -292,6 +321,12 @@ nordvpn(){
     nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
     nordvpn connect Double VPN
     nordvpn s killswitch on
+    # #nordvpn connect "#656"
+    # #nordvpn -c -n "United States #3710"
+    # nordvpn connect --group Dedicated_IP Germany
+    # sleep 10
+    nordvpn status
+    sleep 10
 }
     
 
@@ -607,6 +642,7 @@ main () {
     compute_finish_time
     script_todo_print
     install_nano          # added by me
+    add_repos_sources
     #install_slack
     #install_docker        # add by me
     #pull_cyberchef
@@ -615,11 +651,13 @@ main () {
     #bash_aliases
     #unzip_rockyou
     #enable_auto_login_gnome
-    add_repos_sources
     apt_update
     apt_upgrade
     build_transmission
     nordvpn
+    #install_add_WP_recon
+    install_auto_mac_spoof
+    install_Auto Random Host name
 
 }
 
