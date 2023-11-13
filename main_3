@@ -1,6 +1,6 @@
 #!/bin/bash
 # cloned from st3rven/kali_setup
-chsh -s /bin/bash
+chsh -s /bin/bash    # added by me
  
 # icons
 # ❌⏳💀🎉 ℹ️ ⚠️ 🚀 ✅ ♻ 🚮 🛡 🔧  ⚙ 
@@ -99,8 +99,9 @@ install_base_os_tools(){
         apt install -y -q "$package" >> script.log 2>>script_error.log
     done 
 }
-======added by me ======
+# ======added by me ======
 install_nano(){
+    printf "  ⏳  Installing nano from binaries\n" | tee -a script.log
     # install nano from binaries
     wget https://www.nano-editor.org/dist/v7/nano-7.2.tar.gz
     tar -zxvf nano-7.2.tar.gz
@@ -113,11 +114,45 @@ install_nano(){
     find /usr/share/nano/ -iname "*.nanorc" -exec echo include {} \; >> ~/.nanorc
 }
 
+install_slack() {
+    printf "  ⏳  Install Slack" | tee -a script.log
+    cd /root/Downloads
+    wget --quiet  https://downloads.slack-edge.com/linux_releases/slack-desktop-4.2.0-amd64.deb
+    if [[ $? != 0 ]]; then
+	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
+        echo "$1 failed " >> script.log
+    fi
+    apt_package_install ./slack-desktop*
+    rm -f ./slack-desktop*
+}
+
+install_docker(){
+    printf "  ⏳  Installing docker\n" | tee -a script.log
+    curl -fsSL --silent https://download.docker.com/linux/debian/gpg | sudo apt-key add - >> script.log 2>>script_error.log
+    if [[ $? != 0 ]]; then
+	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
+        echo "$1 failed " >> script.log
+    fi
+    echo 'deb https://download.docker.com/linux/debian stretch stable' > /etc/apt/sources.list.d/docker.list
+    apt_update
+    echo "\n [+] installing docker-ce via apt-get\n" >> script.log
+    apt-get install -y -q docker-ce >> script.log 2>>script_error.log
+    systemctl enable docker >> script.log 2>>script_error.log
+    if [[ $? != 0 ]]; then
+	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
+        echo "$1 failed " >> script.log
+    fi
+    docker version >> script.log 2>>script_error.log
+    if [[ $? != 0 ]]; then
+	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
+        echo "$1 failed " >> script.log
+    fi
+}
 
 
 
 
-======finish added by me ======
+# ======finish added by me ======
 
 install_libs(){
     printf "  ⏳  Installing some libs\n" | tee -a script.log
@@ -429,6 +464,9 @@ main () {
     compute_finish_time
     script_todo_print
     install_nano          # added by me
+    install_slack
+    install_docker        # add by me
+
 }
 
 main
