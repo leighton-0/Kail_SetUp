@@ -6,6 +6,8 @@
 s=5                  # Slows script down so you can see whats going on.
 
 chsh -s /bin/bash    # added by me
+mv .zshrc .zshrc_OLD  # to make the shell use bash & not zsh
+
 # run as root -->> sudo su
 # sudo su
  
@@ -51,10 +53,12 @@ else
   echo -e "  🚀 ${BOLD}Starting Kali setup script${RESET}"
 fi
 
+<<comment
 # enable https repository
 cat <<EOF >/etc/apt/sources.list
 deb https://http.kali.org/kali kali-rolling main non-free contrib
 EOF
+comment
 
 compute_start_time() {
     start_time=$(date +%s)
