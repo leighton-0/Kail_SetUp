@@ -110,7 +110,9 @@ install_base_os_tools() {
     # micro - text editor
     # pip3 and pip
     # apt-utils
-    for package in strace ltrace sshfs nfs-common sshuttle autossh dbeaver jq micro python3-pip python-pip net-tools sshuttle wget curl git mlocate apt-utils nano
+    # HTOP
+    # dnsutils
+    for package in strace ltrace sshfs nfs-common sshuttle autossh dbeaver jq micro python3-pip python-pip net-tools sshuttle wget curl git mlocate apt-utils nano htop
     do
         apt install -y -q "$package" >> script.log 2>>script_error.log
     done 
@@ -127,9 +129,8 @@ add_repos_sources() {
     apt update -y
 }
 
-#dpkg --configure -a
-#apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
-#apt install dnsutils -y
+dpkg --configure -a
+apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
 #apt install flatpak -y
 
 gedit(){
@@ -145,7 +146,7 @@ terminator(){
 
 deluge() {
      printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
-     sleep 5
+     sleep $s
      apt install deluge -y
 }
 
