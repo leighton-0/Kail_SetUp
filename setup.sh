@@ -115,7 +115,7 @@ install_base_os_tools() {
         apt install -y -q "$package" >> script.log 2>>script_error.log
     done 
 }
-# ======added by me ======
+# ======added by me =================================================
 # <<comment
 # comment
 
@@ -132,12 +132,21 @@ add_repos_sources() {
 #apt install dnsutils -y
 #apt install flatpak -y
 
+gedit(){
+    printf "  ⏳  Install Gedit\n" | tee -a script.log
+    apt install gedit -y
+
 terminator(){
     printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
     apt install terminator
     rm -r .config/terminator/config
     wget -P '.config/terminator/' https://raw.githubusercontent.com/leighton-0/5_Terminator_config/main/main
     #curl -k -s https://raw.githubusercontent.com/leighton-0/kali-setup/master/kali-setup-script.sh | bash
+
+deluge() {
+     printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
+     sleep 5
+     apt install deluge -y
 }
 
 auto_mac_spoof(){
@@ -330,17 +339,18 @@ build_transmission() {
     apt install transmission
 }
 
-
-
 nordvpn(){
     printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
+    # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
     if [ ! -f '~/nordvpn*']
     then
+    cd /home/kali/Downloads
     wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+    sudo apt-get install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
+    sudo apt-get update -y
+    sudo apt-get install nordvpn -y
     apt install -y ./nordvpn-release_1.0.0_all.deb
     fi
-    apt update
-    apt install nordvpn
     # token 30 day expiring - 11 December
     # e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
     nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
@@ -617,7 +627,8 @@ manual_stuff_to_do(){
     echo ""
     echo "  Install ReconFTW docker" >> script_todo.log
     echo "" >> script_todo.log
-    echo "  Complete zsh configuration" >> script_todo.log
+    echo "  function to ceate a bootable usb  >> script_todo.log
+    echo " ref https://www.ceos3c.com/linux/create-bootable-usb-from-linux/
     echo "" >> script_todo.log
     echo "  Complete megasync configuration" >> script_todo.log
     echo "" >> script_todo.log
@@ -656,22 +667,22 @@ main () {
     install_exploit_tools
     install_steg_programs
     install_recon_tools
-    install_bloodhound
+    #install_bloodhound
     #install_sublime
     #install_opera
     #install_mega
-    install_stegcracker
+    #install_stegcracker
     #install_nmap_vulscan
     #install_metapackage
     #john_bash_completion
     #configure_metasploit
-    ##fix_kali
-    ##additional_clean
+    fix_kali
+    additional_clean
     manual_stuff_to_do
-    ##compute_finish_time
-    ##script_todo_print
+    compute_finish_time
+    script_todo_print
     #install_nano          # added by me
-    add_repos_sources
+    #add_repos_sources
     apt_update
     #install_slack
     #install_docker        # add by me
@@ -694,6 +705,7 @@ main () {
     #manual_stuff_to_do
     compute_finish_time
     script_todo_print
+    gedit
 
 }
 
