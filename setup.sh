@@ -497,8 +497,9 @@ install_recon_tools(){
     # seclists - list collection
     # photon - osint 
     # ffuf - web fuzzing
+    # zmap
     for package in gobuster dirb wpscan dirbuster netcat nmap nikto netdiscover wafw00f masscan fping theharvester wfuzz amass sublist3r flawfinder eyewitness massdns \
-    subfinder urlcrazy python3-lsassy python3-pypykatz nishang sslscan sslyze seclists photon ffuf
+    subfinder urlcrazy python3-lsassy python3-pypykatz nishang sslscan sslyze seclists photon ffuf zmap
     do
         apt install -y -q "$package" >> script.log 2>>script_error.log
     done 
@@ -608,7 +609,10 @@ additional_clean(){
 
 manual_stuff_to_do(){
     printf "\n  ⏳  Adding Manual work\n" | tee -a script.log
+    echo "=============To Do List===========" >> script_todo.log
     echo ""
+    echo "  Install ReconFTW docker" >> script_todo.log
+    echo "" >> script_todo.log
     echo "  Complete zsh configuration" >> script_todo.log
     echo "" >> script_todo.log
     echo "  Complete megasync configuration" >> script_todo.log
