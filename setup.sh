@@ -63,6 +63,7 @@ compute_start_time() {
 configure_environment() {
     #echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
     echo "HISTTIMEFORMAT='%d/%m/%y %T '" >> /root/.bashrc
+    sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
 }
 
 apt_update() {  
@@ -110,6 +111,8 @@ install_base_os_tools() {
     done 
 }
 # ======added by me ======
+# <<comment
+# comment
 
 add_repos_sources() {
     printf "  🔧  add additional repo sources\n" | tee -a script.log
@@ -238,26 +241,23 @@ install_chromium() {
     echo "# simply override settings above" >> /etc/chromium/default
     echo 'CHROMIUM_FLAGS="--password-store=detect --user-data-dir"' >> /etc/chromium/default
 }
-<<comment
+
 bash_aliases() {
     printf "  ⏳  adding bash aliases\n" | tee -a script.log
-    if [ ! -f ~/.bashrc.bak ]; then           #Check if bashrc.bak has already been copied. If yes then skip
-    cp /root/.bashrc /root/.bashrc.bak                       # bak Up bashrc incase I fuck it up
-    wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases
-    #Add pointer to new .bash_aliases
-    cat <<'EOF' >>.bashrc
+    if [ ! -f ~/.bashrc.bak ]; then                                                  # Check if bashrc.bak has already been copied. If yes then skip
+    cp /root/.bashrc /root/.bashrc.bak                                               # bak Up bashrc incase I fuck it up
+    wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases   # Upload my standard aliases file
+    cat <<"EOF" >>.bashrc                                                            #Add pointer to new .bash_aliases
     if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
     fi
     EOF
     fi
-    # tmux source-file ~/.tmux.conf                                      # source .tmux.conf needs moving
-    . .bashrc && . .bash_aliases                                         #source .bashrc & .bash_aliases
+   . .bashrc && . .bash_aliases                                                       #source .bashrc & .bash_aliases                                     #source .bashrc & .bash_aliases
     echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
     # increase history size
-    sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
 }
-comment
+
 unzip_rockyou() {
     printf "  ⏳  Install gunzip rockyou\n" | tee -a script.log
     cd /usr/share/wordlists/
@@ -666,7 +666,7 @@ main () {
     #pull_cyberchef
     #install_chrome
     #install_chromium
-    #bash_aliases
+    bash_aliases
     #unzip_rockyou
     #enable_auto_login_gnome
     apt_update
