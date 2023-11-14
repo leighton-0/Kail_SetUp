@@ -243,19 +243,18 @@ install_chromium() {
 }
 
 bash_aliases() {
-    printf "  ⏳  adding bash aliases\n" | tee -a script.log
+    printf "  ⏳  adding my bash aliases\n" | tee -a script.log
     if [ ! -f ~/.bashrc.bak ]; then                                                  # Check if bashrc.bak has already been copied. If yes then skip
     cp /root/.bashrc /root/.bashrc.bak                                               # bak Up bashrc incase I fuck it up
     wget https://raw.githubusercontent.com/leighton-0/.dotfiles/main/.bash_aliases   # Upload my standard aliases file
-    cat <<"EOF" >>.bashrc                                                            #Add pointer to new .bash_aliases
+    cat <<"EOF" >>.bashrc                                                            # Add pointer to new .bash_aliases
     if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+    #. ~/.bash_aliases
     fi
     EOF
     fi
    . .bashrc && . .bash_aliases                                                       #source .bashrc & .bash_aliases                                     #source .bashrc & .bash_aliases
-    echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
-    # increase history size
+    # echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
 }
 
 unzip_rockyou() {
