@@ -258,9 +258,8 @@ bash_aliases() {
     fi
    . .bashrc && . .bash_aliases                                                       #source .bashrc & .bash_aliases                                     #source .bashrc & .bash_aliases
     # echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
-
-comment
 }
+comment
 
 unzip_rockyou() {
     printf "  ⏳  Install gunzip rockyou\n" | tee -a script.log
