@@ -61,7 +61,8 @@ compute_start_time() {
 }
 
 configure_environment() {
-    echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
+    #echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
+    echo "HISTTIMEFORMAT='%d/%m/%y %T '" >> /root/.bashrc
 }
 
 apt_update() {  
