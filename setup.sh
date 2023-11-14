@@ -1,7 +1,7 @@
 #!/bin/bash
 # cloned from st3rven/kali_setup
 # to install:-
-#   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/main | bash
+#   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh | bash
 
 s=5                  # Slows script down so you can see whats going on.
 
@@ -19,7 +19,8 @@ chsh -s /bin/bash    # added by me
 # set -x
 # user input
 
-user=$1
+#user=$1
+user=kali
 downloads=/home/"$user"/Downloads
 
 # set colors
