@@ -243,6 +243,8 @@ install_chromium() {
     echo 'CHROMIUM_FLAGS="--password-store=detect --user-data-dir"' >> /etc/chromium/default
 }
 
+<<comment
+# not working -->> not sure why
 bash_aliases() {
     printf "  ⏳  adding my bash aliases\n" | tee -a script.log
     if [ ! -f ~/.bashrc.bak ]; then                                                  # Check if bashrc.bak has already been copied. If yes then skip
@@ -256,6 +258,8 @@ bash_aliases() {
     fi
    . .bashrc && . .bash_aliases                                                       #source .bashrc & .bash_aliases                                     #source .bashrc & .bash_aliases
     # echo "alias ll='ls -la --color=auto'" >> /root/.bashrc
+
+comment
 }
 
 unzip_rockyou() {
@@ -661,18 +665,19 @@ main () {
     ##script_todo_print
     #install_nano          # added by me
     add_repos_sources
+    apt_update
     #install_slack
     #install_docker        # add by me
     #pull_cyberchef
     #install_chrome
     #install_chromium
-    bash_aliases
+    #bash_aliases
     #unzip_rockyou
     #enable_auto_login_gnome
     apt_update
     apt_upgrade
     #build_transmission
-    #nordvpn
+    nordvpn
     #install_add_WP_recon
     #auto_mac_spoof -->> not working needs attention
     #Auto_Random_Host_name
