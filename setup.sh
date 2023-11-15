@@ -53,11 +53,12 @@ else
   echo -e "  🚀 ${BOLD}Starting Kali setup script${RESET}"
 fi
 
-<<comment
+
 # enable https repository
 cat <<EOF >/etc/apt/sources.list
 deb https://http.kali.org/kali kali-rolling main non-free contrib
 EOF
+<<comment
 comment
 
 compute_start_time() {
@@ -82,7 +83,7 @@ apt_upgrade() {
 }
 
 apt_package_install() {
-    echo "\n [+] installing $1 via apt\n" >> script.log
+    printf "  ⏳  apt package install\n" | tee -a script.log
     apt install -y -q $1 >> script.log 2>>script_error.log
 }
 
@@ -129,13 +130,16 @@ add_repos_sources() {
     apt update -y
 }
 
+<<comment
 dpkg --configure -a
 apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
 #apt install flatpak -y
+comment
 
 gedit(){
     printf "  ⏳  Install Gedit\n" | tee -a script.log
     apt install gedit -y
+}
 
 terminator(){
     printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
