@@ -348,8 +348,8 @@ build_transmission() {
 nordvpn(){
     printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
-    if [ ! -f '~/nordvpn*']
-    then
+   #if [ ! -f '~/nordvpn*']
+    #then
     cd /home/kali/Downloads
     wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
     sudo apt-get install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
