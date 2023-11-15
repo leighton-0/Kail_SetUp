@@ -110,10 +110,11 @@ install_base_os_tools() {
     # jq - cli json processor
     # micro - text editor
     # pip3 and pip
+    # python3-setuptools
     # apt-utils
     # HTOP
     # dnsutils
-    for package in strace ltrace sshfs nfs-common sshuttle autossh dbeaver jq micro python3-pip python-pip net-tools sshuttle wget curl git mlocate apt-utils nano htop
+    for package in strace ltrace sshfs nfs-common sshuttle autossh dbeaver jq micro python3-pip python-pip net-tools sshuttle wget curl git mlocate apt-utils nano htop python3-setuptools
     do
         apt install -y -q "$package" >> script.log 2>>script_error.log
     done 
