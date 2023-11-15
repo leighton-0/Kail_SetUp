@@ -359,7 +359,7 @@ nordvpn(){
     fi
     # token 30 day expiring - 11 December
     # e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
-    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
+    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e
     nordvpn connect Double VPN
     nordvpn s killswitch on
     # #nordvpn connect "#656"
