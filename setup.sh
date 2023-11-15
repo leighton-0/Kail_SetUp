@@ -136,17 +136,18 @@ apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-de
 #apt install flatpak -y
 comment
 
-gedit(){
+gedit() {
     printf "  ⏳  Install Gedit\n" | tee -a script.log
     apt install gedit -y
 }
 
-terminator(){
+terminator() {
     printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
     apt install terminator
     rm -r .config/terminator/config
     wget -P '.config/terminator/' https://raw.githubusercontent.com/leighton-0/5_Terminator_config/main/main
     #curl -k -s https://raw.githubusercontent.com/leighton-0/kali-setup/master/kali-setup-script.sh | bash
+}
 
 deluge() {
      printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
@@ -154,14 +155,14 @@ deluge() {
      apt install deluge -y
 }
 
-auto_mac_spoof(){
+auto_mac_spoof() {
     printf "  ⏳  Auto MAC spoof on start up - assuming wlan0\n" | tee -a script.log
     #touch /etc/systemd/system/changemac@.service
     wget -P /etc/systemd/system https://raw.githubusercontent.com/leighton-0/kali-setup/master/changemac@.service
     systemctl enable changemac@wlan0.service
 }
 
-Auto_Random_Host_name(){
+Auto_Random_Host_name() {
     printf "  ⏳  install_Auto Random Host name\n" | tee -a script.log
     git clone https://github.com/tasooshi/namechanger.git
     cd namechanger
@@ -474,6 +475,7 @@ install_exploit_tools(){
         apt install -y -q $package >> "$home"/script.log 2>>script_error.log
     done 
 }
+
 install_steg_programs(){
     printf "  ⏳  Installing steg apps\n" | tee -a script.log
     # stegosuite - steganography
