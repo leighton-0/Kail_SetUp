@@ -357,19 +357,17 @@ nordvpn(){
     sudo apt-get install nordvpn -y
     apt install -y ./nordvpn-release_1.0.0_all.deb
     fi
-<<comment
     # token 30 day expiring - 11 December
     # e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
-    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
+    #nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
     sleep $s
-    nordvpn connect Double VPN
-    sleep $s
-    nordvpn s killswitch on
+    #nordvpn connect Double VPN
+    #sleep $s
+    #nordvpn s killswitch on
     # #nordvpn connect "#656"
     # #nordvpn -c -n "United States #3710"
     # nordvpn connect --group Dedicated_IP Germany
     # sleep 10
-comment
     nordvpn status
     sleep 10
 }
