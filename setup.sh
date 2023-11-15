@@ -151,7 +151,7 @@ terminator() {
 }
 
 deluge() {
-     printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
+     printf "  ⏳  Install deluge\n" | tee -a script.log
      sleep $s
      apt install deluge -y
 }
