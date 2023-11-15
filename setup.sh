@@ -351,15 +351,17 @@ nordvpn(){
     # if [ ! -f '~/nordvpn*']
     # then
     cd /home/kali/Downloads
+    if [ ! -f './nordvpn*']
+    then
     wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
     sudo apt-get install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
     sudo apt-get update -y
     sudo apt-get install nordvpn -y
     # apt install -y ./nordvpn-release_1.0.0_all.deb
-    #fi
+    fi
     # token 30 day expiring - 11 December
     # e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
-    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e
+    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
     sleep $s
     nordvpn connect Double VPN
     sleep $s
@@ -690,7 +692,6 @@ main () {
     fix_kali
     additional_clean
     manual_stuff_to_do
-    script_todo_print
     #install_nano          # added by me
     #add_repos_sources
     apt_update
