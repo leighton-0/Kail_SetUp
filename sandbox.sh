@@ -1,6 +1,6 @@
 #!/bin/bash
 
-run using  curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/sandbox.sh | bash
+# run using  curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/sandbox.sh | bash
 
 printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     s=5
