@@ -7,7 +7,7 @@ cat <<EOF >/etc/apt/sources.list
 deb https://http.kali.org/kali kali-rolling main non-free contrib
 EOF
 
-token=e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
+#token=e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
 echo "enter nordvpn token eg e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403"
 read token
 
