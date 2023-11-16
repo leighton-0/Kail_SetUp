@@ -1,5 +1,7 @@
 #!/bin/bash
 
+run using   https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/sandbox.sh | bash
+
 printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
     # if [ ! -f '~/nordvpn*']
