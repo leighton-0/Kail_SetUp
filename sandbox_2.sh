@@ -12,3 +12,5 @@ sudo tee /etc/apt/sources.list.d/brave-browser-release.list
 sudo apt update
 
 sudo apt install brave-browser
+
+echo "the end"
