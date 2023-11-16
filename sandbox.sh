@@ -18,6 +18,7 @@ printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     fi
     # token 30 day expiring - 11 December
     # e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
+    # read -n 1 -p "input token" 
     nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e
     sleep $s
     nordvpn connect Double VPN
