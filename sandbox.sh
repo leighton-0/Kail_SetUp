@@ -12,8 +12,8 @@ printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
     #sudo apt-get install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
     fi
-    #printf "  🔧  nordvpn already installed\n" 
-    sleep 5
+    #printf "  🔧  nordvpn already down-loaded\n" 
+    sleep $s
     sudo apt-get update -y
     sudo apt-get install nordvpn -y
     << ////
