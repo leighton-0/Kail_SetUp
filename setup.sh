@@ -356,8 +356,8 @@ nordvpn(){
     # then
     wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
     sudo apt-get install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
-    sudo apt-get update -y
-    sudo apt-get install nordvpn -y
+    #sudo apt-get update -y
+    #sudo apt-get install nordvpn -y
     cd ~
     # apt install -y ./nordvpn-release_1.0.0_all.deb
     # fi
