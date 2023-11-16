@@ -358,6 +358,7 @@ nordvpn(){
     sudo apt-get install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
     sudo apt-get update -y
     sudo apt-get install nordvpn -y
+    cd ~
     # apt install -y ./nordvpn-release_1.0.0_all.deb
     # fi
     # token 30 day expiring - 11 December
