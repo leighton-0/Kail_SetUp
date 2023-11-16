@@ -10,7 +10,7 @@ EOF
 printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     s=5
     # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
-        cd /home/kali/Downloads
+    cd /home/kali/Downloads
     wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
     sudo apt install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
     sudo apt update -y
@@ -18,7 +18,7 @@ printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     # token 30 day expiring - 11 December
     # e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
     # read -n 1 -p "input token" 
-    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e
+    nordvpn login --token e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e0403
     sleep $s
     nordvpn connect Double VPN
     sleep $s
