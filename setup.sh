@@ -708,6 +708,7 @@ main () {
     apt_update
     apt_upgrade
     #build_transmission
+    deluge
     nordvpn
     #install_add_WP_recon
     #auto_mac_spoof -->> not working needs attention
