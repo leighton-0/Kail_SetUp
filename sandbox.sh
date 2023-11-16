@@ -38,3 +38,4 @@ printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     nordvpn status
     sleep 10
     '////'
+    printf "  🔧  THE END\n" 
