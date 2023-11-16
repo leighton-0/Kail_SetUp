@@ -355,10 +355,12 @@ nordvpn(){
     # if [ ! -f './nordvpn*']
     # then
     wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+    # wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+    cd ~
     sudo apt-get install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
     #sudo apt-get update -y
     #sudo apt-get install nordvpn -y
-    cd ~
+    #cd ~
     # apt install -y ./nordvpn-release_1.0.0_all.deb
     # fi
     # token 30 day expiring - 11 December
