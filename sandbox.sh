@@ -2,6 +2,11 @@
 
 # run using  curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/sandbox.sh | bash
 
+# enable https repository
+cat <<EOF >/etc/apt/sources.list
+deb https://http.kali.org/kali kali-rolling main non-free contrib
+EOF
+
 printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     s=5
     # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
