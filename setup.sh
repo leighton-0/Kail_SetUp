@@ -420,24 +420,6 @@ install_fonts(){
     fc-cache -f
 }
 
-install_zsh(){
-    printf "  ⏳  Installing zsh shell and set custom config\n" | tee -a script.log
-    cd "$downloads"
-    for package in zsh
-    do
-        apt install -y -q "$package" >> script.log 2>>script_error.log
-    done
-    wget --quiet https://www.dropbox.com/s/as1ld1dylio14pv/myconfig_zsh.tar.gz\?dl\=0 -O zsh_config.tar.gz
-    if [[ $? != 0 ]]; then
-        printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
-        echo "$1 failed " >> script.log
-    fi
-    tar -xzf zsh_config.tar.gz
-    cp -r .zshrc /home/"$user"
-    cp -r .oh-my-zsh/ /home/"$user"/
-    chsh -s $(which zsh)
-}
-
 install_re_tools(){
     printf "  ⏳  Installing file analyzer apps\n" | tee -a script.log
     # exiftool - 
@@ -678,7 +660,6 @@ main () {
     install_base_os_tools
     install_python3_related
     ##install_fonts
-    ##install_zsh
     install_re_tools
     install_exploit_tools
     install_steg_programs
@@ -692,9 +673,6 @@ main () {
     #install_metapackage
     #john_bash_completion
     #configure_metasploit
-    fix_kali
-    additional_clean
-    manual_stuff_to_do
     #install_nano          # added by me
     #add_repos_sources
     apt_update
@@ -718,10 +696,9 @@ main () {
     #terminator
     fix_kali
     additional_clean
-    #manual_stuff_to_do
-    compute_finish_time
-    script_todo_print
     gedit
+    compute_finish_time
+    
 
 }
 
