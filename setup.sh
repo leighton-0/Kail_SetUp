@@ -708,6 +708,7 @@ main () {
     #pull_cyberchef
     #install_chrome
     #install_chromium
+    #install_brave
     #bash_aliases
     #unzip_rockyou
     #enable_auto_login_gnome
