@@ -1,4 +1,7 @@
 #!/bin/bash
+# ============================
+# WORKING OK NEEDS INTEGRATING INTO MAIN SCRIPT
+# ===========================
 
 # run using  curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/sandbox.sh | bash
 
