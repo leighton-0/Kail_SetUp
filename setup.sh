@@ -122,8 +122,8 @@ install_base_os_tools() {
     done 
 }
 # ======added by me =================================================
-# <<comment
-# comment
+<<comment
+
 
 add_repos_sources() {
     printf "  🔧  add additional repo sources\n" | tee -a script.log
@@ -132,7 +132,7 @@ add_repos_sources() {
     cd ~
     apt update -y
 }
-
+comment
 <<comment
 dpkg --configure -a
 apt install build-essential libcurl4-openssl-dev libxml2 libxml2-dev libxslt1-dev ruby-dev  libgmp-dev zlib1g-dev -y
@@ -225,20 +225,6 @@ install_docker() {
 	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
         echo "$1 failed " >> script.log
     fi
-}
-
-pull_cyberchef() {
-    printf "  ⏳  Install cyberchef docker container\n" | tee -a script.log
-    docker pull remnux/cyberchef >> script.log 2>>script_error.log
-    if [[ $? != 0 ]]; then
-	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
-        echo "$1 failed " >> script.log
-    fi
-    echo "# Run docker cyberchef" >> script_todo.log  
-    echo "# docker run -d -p 8080:8080 remnux/cyberchef" >> script_todo.log  
-    echo "# http://localhost:8080/" >> script_todo.log  
-    echo "# docker ps" >> script_todo.log  
-    echo "# docker stop <container id>" >> script_todo.log  
 }
 
 install_chrome() {
@@ -525,16 +511,6 @@ install_bloodhound(){
     curl -L --silent -o "/home/"$user"/.config/bloodhound/customqueries.json" "https://raw.githubusercontent.com/CompassSecurity/BloodHoundQueries/master/customqueries.json"
 }
 
-fix_kali() {
-    printf "  ⏳  Clonning PIMPMYKALI Repository\n" | tee -a "$home"/script.log
-    cd "$downloads"
-    git clone --quiet https://github.com/Dewalt-arch/pimpmykali.git
-    if [[ $? -ne 0 ]]; then
-        printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
-        echo "$1 failed " >> "$home"/script.log
-    fi 
-}
-
 install_sublime() {
     printf "  ⏳  Installing Sublime Text\n" | tee -a script.log
     wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
@@ -545,18 +521,6 @@ install_sublime() {
     echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
     apt update
     apt install -y -q sublime-text >> script.log 2>>script_error.log
-}
-
-install_opera(){
-    printf "  ⏳  Installing Opera browser\n" | tee -a script.log
-    wget -qO - https://deb.opera.com/archive.key | sudo apt-key add -
-    if [[ $? != 0 ]]; then
-        printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
-        echo "$1 failed " >> script.log
-    fi
-    echo 'deb https://deb.opera.com/opera-stable/ stable non-free' | sudo tee /etc/apt/sources.list.d/opera-stable.list
-    apt update
-    apt install -y -q opera-stable >> script.log 2>>script_error.log
 }
 
 install_mega() {
@@ -598,11 +562,6 @@ install_nmap_vulscan(){
     fi  
 }
 
-john_bash_completion() {
-    printf "  ⏳  enabling john bash completion\n" | tee -a script.log
-    echo ". /usr/share/bash-completion/completions/john.bash_completion" >> /$user/.zshrc
-}
-
 configure_metasploit(){
     printf "  🔧  configure metasploit\n" | tee -a script.log
     systemctl start postgresql >> script.log
@@ -614,26 +573,6 @@ additional_clean(){
     cd ~/ # go home
     updatedb # update slocated database
     history -cw 2>/dev/null # clean history
-}
-
-manual_stuff_to_do(){
-    printf "\n  ⏳  Adding Manual work\n" | tee -a script.log
-    echo "=============To Do List===========" >> script_todo.log
-    echo ""
-    echo "  Install ReconFTW docker" >> script_todo.log
-    echo "" >> script_todo.log
-    echo "  function to ceate a bootable usb  >> script_todo.log
-    echo " ref https://www.ceos3c.com/linux/create-bootable-usb-from-linux/
-    echo "" >> script_todo.log
-    echo "  Complete megasync configuration" >> script_todo.log
-    echo "" >> script_todo.log
-    echo "  Complete opera browser configuration" >> script_todo.log
-    echo "" >> script_todo.log
-    echo "  Complete GUI configuration" >> script_todo.log
-    echo "" >> script_todo.log
-    echo "=============Firefox addons===========" >> script_todo.log
-    echo "  FoxyProxy Standard" >> script_todo.log
-    echo "" >> script_todo.log  
 }
 
 compute_finish_time(){
