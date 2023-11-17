@@ -648,6 +648,7 @@ script_todo_print() {
 }
 
 main () {
+<< \\\\
     compute_start_time
     configure_environment
     apt_update
@@ -686,6 +687,7 @@ main () {
     apt_upgrade
     #build_transmission
     deluge
+\\\\
     nordvpn
     #install_add_WP_recon
     #auto_mac_spoof -->> not working needs attention
