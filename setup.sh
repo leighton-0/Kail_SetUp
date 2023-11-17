@@ -2,6 +2,8 @@
 # cloned from st3rven/kali_setup
 # to install:-
 #   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh | bash
+# or
+# wget https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh && chmod +x setup.sh
 
 s=5                  # Slows script down so you can see whats going on.
 
