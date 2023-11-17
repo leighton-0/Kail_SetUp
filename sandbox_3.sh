@@ -588,12 +588,6 @@ script_todo_print() {
 
 main () {
     nordvpn
-    #install_add_WP_recon
-    #auto_mac_spoof -->> not working needs attention
-    #Auto_Random_Host_name
-    #terminator
-    fix_kali
-    additional_clean
     gedit
 
 }
