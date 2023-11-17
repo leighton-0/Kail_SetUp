@@ -358,10 +358,8 @@ nordvpn() {
     # sleep 10
     nordvpn status
     sleep 10
+    printf "  🔧  THE END\n" 
 }
-
-# <<comment
-# comment
 
 # ======finish added by me ======
 
