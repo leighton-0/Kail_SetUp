@@ -18,7 +18,7 @@ mv .zshrc .zshrc_OLD  # to make the shell use bash & not zsh
 
 # run update and upgrade, before running script
 # apt update && apt upgrade -y
-## curl -L --silent https://bit.ly/31BE8PI <user> | bash
+## curl -L --silent https://bit.ly/ <user> | bash
 
 # set -x
 # user input
