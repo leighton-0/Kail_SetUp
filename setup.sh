@@ -263,6 +263,10 @@ install_chromium() {
     echo 'CHROMIUM_FLAGS="--password-store=detect --user-data-dir"' >> /etc/chromium/default
 }
 
+install_brave() {
+    curl -s https://raw.githubusercontent.com/nu11secur1ty/Kali-Linux/master/brave-browser-Kali-Linux/kukurus.sh | bash
+}    
+
 <<comment
 # not working -->> not sure why
 bash_aliases() {
