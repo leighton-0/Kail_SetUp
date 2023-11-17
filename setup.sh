@@ -1,26 +1,25 @@
 #!/bin/bash
-# cloned from st3rven/kali_setup
-# to install:-
-#   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh | bash
-# or
-# wget https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh && chmod +x setup.sh
-
-s=5                  # Slows script down so you can see whats going on.
-
-chsh -s /bin/bash    # added by me
-mv .zshrc .zshrc_OLD  # to make the shell use bash & not zsh
-
+# cloned & further developed from st3rven/kali_setup
 # run as root -->> sudo su
-# sudo su
+# to install:-
+#   first set the nordvpn token as an environmental variable -->> export TOKEN=xxxxxxxxxxxxxx
+#    then;
+#   curl -k -s https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh | bash
+
+s=5                    # Slows script down so you can see whats going on.
+# read -p "Press any key to resume ..."  -->> usefull for pausing script
+
+chsh -s /bin/bash      # changes shell from zxh to bash
+mv .zshrc .zshrc_OLD   # to make the shell use bash & not zsh
  
 # icons
 # ❌⏳💀🎉 ℹ️ ⚠️ 🚀 ✅ ♻ 🚮 🛡 🔧  ⚙ 
 
 # run update and upgrade, before running script
 # apt update && apt upgrade -y
-## curl -L --silent https://bit.ly/31BE8PI <user> | bash
+# curl -L --silent https://bit.ly/xxxxx<user> | bash
 
-# set -x
+set -x
 # user input
 
 #user=$1
@@ -54,7 +53,6 @@ if [ $# -eq 0 ]
 else
   echo -e "  🚀 ${BOLD}Starting Kali setup script${RESET}"
 fi
-
 
 # enable https repository
 cat <<EOF >/etc/apt/sources.list
@@ -332,7 +330,6 @@ configure_wireshark() {
 	ENDOFWIRESHARK
 }
 
-
 build_transmission() {
     printf "  🔧  install transmission\n" | tee -a script.log
     apt install transmission
@@ -359,9 +356,6 @@ nordvpn() {
     nordvpn status
     sleep 10
 }
-
-# <<comment
-# comment
 
 # ======finish added by me ======
 
@@ -511,18 +505,6 @@ install_bloodhound(){
     curl -L --silent -o "/home/"$user"/.config/bloodhound/customqueries.json" "https://raw.githubusercontent.com/CompassSecurity/BloodHoundQueries/master/customqueries.json"
 }
 
-install_sublime() {
-    printf "  ⏳  Installing Sublime Text\n" | tee -a script.log
-    wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-    if [[ $? != 0 ]]; then
-        printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
-        echo "$1 failed " >> script.log
-    fi
-    echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-    apt update
-    apt install -y -q sublime-text >> script.log 2>>script_error.log
-}
-
 install_mega() {
     printf "  ⏳  Installing MEGAsync\n" | tee -a script.log
     cd "$downloads"
@@ -568,22 +550,15 @@ configure_metasploit(){
     msfdb init >> script.log
 }
 
-additional_clean(){
-    printf "  ♻  additional cleaning\n" | tee -a script.log
-    cd ~/ # go home
-    updatedb # update slocated database
-    history -cw 2>/dev/null # clean history
-}
-
 compute_finish_time(){
     finish_time=$(date +%s)
     echo -e "  ⌛ Time (roughly) taken: ${YELLOW}$(( $(( finish_time - start_time )) / 60 )) minutes${RESET}"
     echo "\n\n Install completed - $finish_time \n" >> script.log
 }
 
-script_todo_print() {
-    printf "  ⏳  Printing notes\n" | tee -a script.log
-    cat script_todo.log
+install_cherrytree() {
+    printf "  ⏳  Install Cherry Tree\n" | tee -a script.log
+    apt install cherrytree -y
 }
 
 main () {
@@ -596,45 +571,37 @@ main () {
     install_libs
     install_base_os_tools
     install_python3_related
-    ##install_fonts
+    install_fonts
     install_re_tools
     install_exploit_tools
     install_steg_programs
     install_recon_tools
     #install_bloodhound
-    #install_sublime
-    #install_opera
-    #install_mega
+    install_mega
     #install_stegcracker
     #install_nmap_vulscan
     #install_metapackage
-    #john_bash_completion
     #configure_metasploit
     #install_nano          # added by me
     #add_repos_sources
-    apt_update
     #install_slack
-    #install_docker        # add by me
-    #pull_cyberchef
+    install_docker        # add by me
     #install_chrome
     #install_chromium
     #install_brave
     #bash_aliases
     #unzip_rockyou
     #enable_auto_login_gnome
-    apt_update
-    apt_upgrade
     #build_transmission
     deluge
-    comment
-    nordvpn
+    # nordvpn
     #install_add_WP_recon
     #auto_mac_spoof -->> not working needs attention
     #Auto_Random_Host_name
     #terminator
-    fix_kali
     additional_clean
     gedit
+    install_cherrytree
     compute_finish_time
     
 
