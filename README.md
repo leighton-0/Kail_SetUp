@@ -12,5 +12,10 @@ or
 ```
 wget https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh && chmod +x setup.sh
 ```
+Install ReconFTW docker
+function to ceate a bootable usb  >> script_todo.log
+    ref https://www.ceos3c.com/linux/create-bootable-usb-from-linux/
+Complete megasync configuration" >> script_todo.log
+    
 
 
