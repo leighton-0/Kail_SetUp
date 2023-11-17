@@ -357,8 +357,7 @@ nordvpn() {
     # nordvpn connect --group Dedicated_IP Germany
     # sleep 10
     nordvpn status
-    sleep 10
-    printf "  🔧  THE END\n" 
+    read -p "Press any key to resume ..." 
 }
 
 # ======finish added by me ======
