@@ -58,6 +58,26 @@ configure_environment(){
     echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
 }
 
+printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
+    s=5
+    # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
+    cd /home/kali/Downloads
+    wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+    sudo apt install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
+    sudo apt update -y
+    sudo apt install nordvpn -y
+    nordvpn login --token $TOKEN
+    sleep $s
+    nordvpn connect Double VPN
+    sleep $s
+    nordvpn s killswitch on
+    # #nordvpn connect "#656"
+    # #nordvpn -c -n "United States #3710"
+    # nordvpn connect --group Dedicated_IP Germany
+    # sleep 10
+    nordvpn status
+    sleep 10
+
 apt_update() {  
     printf "  ⏳  apt update\n" | tee -a script.log
     apt update -qq >> script.log 2>>script_error.log
