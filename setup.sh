@@ -9,7 +9,8 @@
 # set -x
 # user input
 
-user=$1
+#user=$1
+user=kali
 downloads=/home/"$user"/Downloads
 
 # set colors
