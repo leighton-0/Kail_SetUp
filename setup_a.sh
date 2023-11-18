@@ -303,16 +303,10 @@ install_sublime() {
     apt install -y -q sublime-text >> script.log 2>>script_error.log
 }
 
-install_opera(){
+install_brave(){
     printf "  ⏳  Installing Opera browser\n" | tee -a script.log
-    wget -qO - https://deb.opera.com/archive.key | sudo apt-key add -
-    if [[ $? != 0 ]]; then
-        printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
-        echo "$1 failed " >> script.log
-    fi
-    echo 'deb https://deb.opera.com/opera-stable/ stable non-free' | sudo tee /etc/apt/sources.list.d/opera-stable.list
-    apt update
-    apt install -y -q opera-stable >> script.log 2>>script_error.log
+    curl -s https://raw.githubusercontent.com/nu11secur1ty/Kali-Linux/master/brave-browser-Kali-Linux/kukurus.sh | bash
+    
 }
 
 install_mega() {
@@ -416,7 +410,7 @@ main () {
     install_recon_tools
     install_bloodhound
     #install_sublime
-    #install_opera
+    install_brave
     #install_mega
     install_stegcracker
     install_nmap_vulscan
