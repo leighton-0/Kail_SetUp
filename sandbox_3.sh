@@ -56,12 +56,11 @@ else
   echo -e "  🚀 ${BOLD}Starting Kali setup script${RESET}"
 fi
 
-
+<<comment
 # enable https repository
 cat <<EOF >/etc/apt/sources.list
 deb https://http.kali.org/kali kali-rolling main non-free contrib
 EOF
-<<comment
 comment
 
 compute_start_time() {
@@ -72,7 +71,7 @@ compute_start_time() {
 configure_environment() {
     #echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
     echo "HISTTIMEFORMAT='%d/%m/%y %T '" >> /root/.bashrc
-    sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
+    
 }
 
 apt_update() {  
