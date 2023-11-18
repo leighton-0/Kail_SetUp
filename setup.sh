@@ -343,10 +343,25 @@ configure_metasploit(){
     msfdb init >> script.log
 }
 
-
-
-
-
+nordvpn() {
+    printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
+    s=5
+    # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
+    cd /home/kali/Downloads
+    wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+    sudo apt install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
+    sudo apt update -y
+    sudo apt install nordvpn -y
+    nordvpn login --token $TOKEN
+    sleep $s
+    nordvpn connect Double VPN
+    sleep $s
+    nordvpn s killswitch on
+    # #nordvpn connect "#656"
+    # #nordvpn -c -n "United States #3710"
+    # nordvpn connect --group Dedicated_IP Germany
+    nordvpn status
+    # sleep 10
 
 additional_clean(){
     printf "  ♻  additional cleaning\n" | tee -a script.log
