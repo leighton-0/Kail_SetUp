@@ -69,7 +69,6 @@ compute_start_time() {
 configure_environment() {
     #echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
     echo "HISTTIMEFORMAT='%d/%m/%y %T '" >> /root/.bashrc
-    sed -i "s/HISTSIZE=1000/HISTSIZE=1000000/g" /root/.bashrc
 }
 
 apt_update() {  
@@ -82,10 +81,12 @@ apt_upgrade() {
     DEBIAN_FRONTEND=noninteractive apt-get upgrade -y -qq >> script.log 2>>script_error.log
 }
 
+<<comment
 apt_package_install() {
     printf "  ⏳  apt package install\n" | tee -a script.log
     apt install -y -q $1 >> script.log 2>>script_error.log
 }
+
 
 install_kernel_headers() {
     printf "  ⏳  install kernel headers\n" | tee -a script.log
@@ -97,7 +98,7 @@ install_kernel_headers() {
         printf " ${YELLOW}[i]${RESET} ${YELLOW}Reboot${RESET} your machine\n"
     fi
 }
-
+comment
 install_base_os_tools() {
     printf "  ⏳  Installing base os tools programs\n" | tee -a script.log
     # strace
@@ -121,8 +122,6 @@ install_base_os_tools() {
 }
 # ======added by me =================================================
 <<comment
-
-
 add_repos_sources() {
     printf "  🔧  add additional repo sources\n" | tee -a script.log
     cd /etc/apt/sources.list.d
@@ -223,23 +222,6 @@ install_docker() {
 	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
         echo "$1 failed " >> script.log
     fi
-}
-
-install_chrome() {
-    printf "  ⏳  Install Chrome\n" | tee -a script.log
-    wget --quiet https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-    if [[ $? != 0 ]]; then
-	    printf "${CLEAR_LINE}❌${RED} $1 failed ${NO_COLOR}\n"
-        echo "$1 failed " >> script.log
-    fi  
-    dpkg -i ./google-chrome-stable_current_amd64.deb >> script.log
-    apt --fix-broken install -y
-    rm -f ./google-chrome-stable_current_amd64.deb
-    # enable chrome start as root
-    cp /usr/bin/google-chrome-stable /usr/bin/google-chrome-stable.old && sed -i 's/^\(exec.*\)$/\1 --user-data-dir/' /usr/bin/google-chrome-stable
-    sed -i -e 's@Exec=/usr/bin/google-chrome-stable %U@Exec=/usr/bin/google-chrome-stable %U --no-sandbox@g' /usr/share/applications/google-chrome.desktop 
-    # chrome alias
-    echo "alias chrome='google-chrome-stable --no-sandbox file:///root/dev/start_page/index.html'" >> /root/.bashrc
 }
 
 install_chromium() {
