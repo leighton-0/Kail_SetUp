@@ -544,12 +544,11 @@ install_cherrytree() {
 }
 
 main () {
-    <<comment
     compute_start_time
     configure_environment
     apt_update
     apt_upgrade
-    install_kernel_headers
+    # install_kernel_headers
     install_libs
     install_base_os_tools
     install_python3_related
@@ -568,15 +567,14 @@ main () {
     #add_repos_sources
     #install_slack
     install_docker        # add by me
-    #install_chrome
     #install_chromium
     #install_brave
     #bash_aliases
-    #unzip_rockyou
+    unzip_rockyou
     #enable_auto_login_gnome
     #build_transmission
     deluge
-    # nordvpn
+    nordvpn
     #install_add_WP_recon
     #auto_mac_spoof -->> not working needs attention
     #Auto_Random_Host_name
