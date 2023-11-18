@@ -44,6 +44,9 @@ fi
 # enable https repository
 cat <<EOF >/etc/apt/sources.list
 deb https://http.kali.org/kali kali-rolling main non-free contrib
+#The kali Rolling Repository
+deb http://repo.kali.org/kali kali-rolling main contrib non-free
+deb-src http://repo.kali.org/kali kali-rolling main contrib non-free
 EOF
 
 compute_start_time(){
