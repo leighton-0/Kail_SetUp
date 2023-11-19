@@ -382,6 +382,60 @@ manual_stuff_to_do(){
     echo "" >> script_todo.log  
 }
 
+gedit() {
+    printf "  ⏳  Install Gedit\n" | tee -a script.log
+    apt install gedit -y
+}
+
+terminator() {
+    printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
+    apt install terminator
+    rm -r .config/terminator/config
+    wget -P '.config/terminator/' https://raw.githubusercontent.com/leighton-0/5_Terminator_config/main/main
+    #curl -k -s https://raw.githubusercontent.com/leighton-0/kali-setup/master/kali-setup-script.sh | bash
+}
+
+deluge() {
+     printf "  ⏳  Install deluge\n" | tee -a script.log
+     sleep $s
+     apt install deluge -y
+}
+
+auto_mac_spoof() {
+    printf "  ⏳  Auto MAC spoof on start up - assuming wlan0\n" | tee -a script.log
+    #touch /etc/systemd/system/changemac@.service
+    wget -P /etc/systemd/system https://raw.githubusercontent.com/leighton-0/kali-setup/master/changemac@.service
+    systemctl enable changemac@wlan0.service
+}
+
+Auto_Random_Host_name() {
+    printf "  ⏳  install_Auto Random Host name\n" | tee -a script.log
+    git clone https://github.com/tasooshi/namechanger.git
+    cd namechanger
+    make install
+    cd ~
+}
+
+install_add_WP_recon(){
+    printf "  ⏳  Installing WP recon scripts\n" | tee -a script.log
+    wget https://raw.githubusercontent.com/leighton-0/1_auto_wpscan/master/auto_wpscan.sh   #install auto_wpscan
+}
+
+install_nano() {
+    printf "  ⏳  Installing nano from binaries\n" | tee -a script.log
+    # install nano from binaries
+    wget https://www.nano-editor.org/dist/v7/nano-7.2.tar.gz
+    tar -zxvf nano-7.2.tar.gz
+    cd nano-7.2
+    sudo apt install libncurses-dev
+    ./configure
+    make
+    make install
+    # set up colour text ref:- https://askubuntu.com/questions/90013/how-do-i-enable-syntax-highlighting-in-nano
+    find /usr/share/nano/ -iname "*.nanorc" -exec echo include {} \; >> ~/.nanorc
+}
+
+
 compute_finish_time(){
     finish_time=$(date +%s)
     echo -e "  ⌛ Time (roughly) taken: ${YELLOW}$(( $(( finish_time - start_time )) / 60 )) minutes${RESET}"
@@ -392,6 +446,8 @@ script_todo_print() {
     printf "  ⏳  Printing notes\n" | tee -a script.log
     cat script_todo.log
 }
+
+
 
 main () {
     compute_start_time
@@ -419,6 +475,13 @@ main () {
     #configure_metasploit
     fix_kali
     additional_clean
+    gedit
+    terminator
+    deluge
+    Auto_Random_Host_name
+    auto_mac_spoof
+    install_add_WP_recon
+    install_nano
     #manual_stuff_to_do
     compute_finish_time
     script_todo_print
