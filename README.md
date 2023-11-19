@@ -8,7 +8,7 @@ export TOKEN=e9f2ab4ec9525094e607b4b25633c2e890e60c200af048a5ef8202dd47b8386e040
 ```
 
 ```
-curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup.sh | bash
+curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup-a.sh | bash
 
 ```
 # To Do
