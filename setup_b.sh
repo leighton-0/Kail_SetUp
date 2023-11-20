@@ -67,9 +67,12 @@ printf "  ⏳  install & logon to nordvpn\n" | tee -a script.log
     # #nordvpn connect "#656"
     # #nordvpn -c -n "United States #3710"
     # nordvpn connect --group Dedicated_IP Germany
-    # sleep 10
+    printf '\n============================================================\n'
+    printf '[+] NordVPN status\n'
     nordvpn status
-    sleep 10
+    sleep 20
+    printf '============================================================\n\n'
+    
 
 configure_environment(){
     echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
