@@ -407,18 +407,18 @@ main () {
     install_kernel_headers
     install_libs
     install_base_os_tools
-    install_python3_related
+    #install_python3_related
     ##install_fonts
     install_re_tools
-    install_exploit_tools
-    install_steg_programs
-    install_recon_tools
-    install_bloodhound
+    #install_exploit_tools
+    #install_steg_programs
+    #install_recon_tools
+    #install_bloodhound
     install_brave
     #install_mega
-    install_stegcracker
+    #install_stegcracker
     install_nmap_vulscan
-    install_metapackage
+    #install_metapackage
     #configure_metasploit
     fix_kali
     additional_clean
