@@ -404,7 +404,7 @@ main () {
     configure_environment
     apt_update
     apt_upgrade
-    install_kernel_headers
+    #install_kernel_headers
     install_libs
     install_base_os_tools
     install_python3_related
