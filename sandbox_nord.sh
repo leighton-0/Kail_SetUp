@@ -9,7 +9,8 @@
 cat <<EOF >/etc/apt/sources.list
 deb https://http.kali.org/kali kali-rolling main non-free contrib
 EOF
-apt update -y && apt upgrade -y
+
+apt update && apt upgrade -y
 
 printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
