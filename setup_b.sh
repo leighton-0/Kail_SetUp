@@ -67,17 +67,16 @@ printf "  ⏳  install & logon to nordvpn\n" | tee -a script.log
     # #nordvpn connect "#656"
     # #nordvpn -c -n "United States #3710"
     # nordvpn connect --group Dedicated_IP Germany
-    printf '\n============================================================\n'
-    printf '[+] NordVPN status\n'
+    printf '${RED\n============================================================\n'
+    printf '[+] ${RED} ${BOLD}NordVPN NordVPN status\n'
     nordvpn status
+    printf '============================================================\n\n
     sleep 20
-    printf '============================================================\n\n'
-    
+    ${RESET}
 
 configure_environment(){
     echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
 }
-
 
 apt_update() {  
     printf "  ⏳  apt update\n" | tee -a script.log
