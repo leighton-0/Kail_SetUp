@@ -337,6 +337,7 @@ gedit() {
     apt install gedit -y
 }
 
+<< \\\\
 terminator() {
     printf "  ⏳  Install & Set up Terminator\n" | tee -a script.log
     apt install terminator
@@ -344,6 +345,7 @@ terminator() {
     wget -P '.config/terminator/' https://raw.githubusercontent.com/leighton-0/5_Terminator_config/main/main
     #curl -k -s https://raw.githubusercontent.com/leighton-0/kali-setup/master/kali-setup-script.sh | bash
 }
+\\\\
 
 deluge() {
      printf "  ⏳  Install deluge\n" | tee -a script.log
@@ -423,7 +425,7 @@ main () {
     fix_kali
     additional_clean
     gedit
-    terminator
+    #terminator
     deluge
     Auto_Random_Host_name
     auto_mac_spoof
