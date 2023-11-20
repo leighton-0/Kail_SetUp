@@ -3,7 +3,7 @@
 # WORKING OK NEEDS INTEGRATING INTO MAIN SCRIPT
 # ===========================
 
-# run using  curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/sandbox.sh | bash
+# run using  curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/sandbox_nord.sh | bash
 
 # enable https repository
 cat <<EOF >/etc/apt/sources.list
@@ -21,6 +21,7 @@ printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     nordvpn login --token $TOKEN
     
     nordvpn connect Double VPN
+   
   
     nordvpn s killswitch on
     # #nordvpn connect "#656"
@@ -29,4 +30,4 @@ printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
    
     nordvpn status
     sleep 5
-    printf "  🔧  THE END\n" 
+    apt install deluge -y 
