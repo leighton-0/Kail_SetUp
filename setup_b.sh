@@ -409,7 +409,7 @@ main () {
     install_base_os_tools
     install_python3_related
     ##install_fonts
-    #install_re_tools
+    install_re_tools
     #install_exploit_tools
     #install_steg_programs
     #install_recon_tools
@@ -425,13 +425,13 @@ main () {
     gedit
     #terminator
     deluge
-    Auto_Random_Host_name
-    auto_mac_spoof
-    install_add_WP_recon
+    #Auto_Random_Host_name
+    #auto_mac_spoof
+    #install_add_WP_recon
     install_nano
     #manual_stuff_to_do
     compute_finish_time
-    script_todo_print
+    #script_todo_print
 }
 
 main
