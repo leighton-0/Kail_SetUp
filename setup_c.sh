@@ -70,7 +70,7 @@ printf "  ⏳  install & logon to nordvpn\n" | tee -a script.log
     printf '${RED\n============================================================\n'
     printf '[+] NordVPN NordVPN status\n'
     nordvpn status
-    printf '============================================================\n\n
+    printf '============================================================\n\n'
     sleep 20
     ${RESET}
 
