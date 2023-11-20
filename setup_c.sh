@@ -423,7 +423,7 @@ main () {
     fix_kali
     additional_clean
     gedit
-    terminator
+    #terminator
     deluge
     Auto_Random_Host_name
     auto_mac_spoof
@@ -431,7 +431,7 @@ main () {
     install_nano
     #manual_stuff_to_do
     compute_finish_time
-    script_todo_print
+    #script_todo_print
 }
 
 main
