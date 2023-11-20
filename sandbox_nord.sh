@@ -27,7 +27,10 @@ printf "  🔧  install & logon to nordvpn\n" | tee -a script.log
     # #nordvpn connect "#656"
     # #nordvpn -c -n "United States #3710"
     # nordvpn connect --group Dedicated_IP Germany
-   
+    printf '\n============================================================\n'
+    printf '[+] NordVPN NordVPN status\n'
     nordvpn status
+    printf '============================================================\n\n'
+    
     sleep 5
     apt install deluge -y 
