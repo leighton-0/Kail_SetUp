@@ -2,6 +2,7 @@
 # icons
 # ❌⏳💀🎉 ℹ️ ⚠️ 🚀 ✅ ♻ 🚮 🛡 🔧  ⚙ 
 
+
 # apt update && apt upgrade -y
 
 user=kali
