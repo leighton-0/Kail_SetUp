@@ -2,8 +2,9 @@
 # icons
 # ❌⏳💀🎉 ℹ️ ⚠️ 🚀 ✅ ♻ 🚮 🛡 🔧  ⚙ 
 
-
-# apt update && apt upgrade -y
+# ################################
+# Installs Nordvpn & deluge
+# ################################
 
 user=kali
 downloads=/home/"$user"/Downloads
@@ -94,13 +95,6 @@ install_mega() {
     rm -f ./megasync-Debian_10.0_amd64.deb
 }
 
-additional_clean(){
-    printf "  ♻  additional cleaning\n" | tee -a script.log
-    cd ~/ # go home
-    updatedb # update slocated database
-    history -cw 2>/dev/null # clean history
-}
-
 gedit() {
     printf "  ⏳  Install Gedit\n" | tee -a script.log
     apt install gedit -y
@@ -141,7 +135,6 @@ install_nano() {
     find /usr/share/nano/ -iname "*.nanorc" -exec echo include {} \; >> ~/.nanorc
 }
 
-
 compute_finish_time(){
     finish_time=$(date +%s)
     echo -e "  ⌛ Time (roughly) taken: ${YELLOW}$(( $(( finish_time - start_time )) / 60 )) minutes${RESET}"
@@ -155,12 +148,6 @@ main () {
     apt_upgrade
     install_brave
     #install_mega
-    #install_stegcracker
-    #install_nmap_vulscan
-    #install_metapackage
-    #configure_metasploit
-    fix_kali
-    additional_clean
     gedit
     #terminator
     deluge
