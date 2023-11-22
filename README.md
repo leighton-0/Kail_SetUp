@@ -22,7 +22,7 @@ function to ceate a bootable usb
 Complete megasync configuration"
 script for persistance
 nordvpn lists bithub
-set up wireguard
+set up wireguard ref -->> https://github.com/sfiorini/NordVPN-Wireguard
     
 
 
