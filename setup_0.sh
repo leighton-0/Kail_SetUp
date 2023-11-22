@@ -2,6 +2,10 @@
 # icons
 # ❌⏳💀🎉 ℹ️ ⚠️ 🚀 ✅ ♻ 🚮 🛡 🔧  ⚙ 
 
+# ######################################
+# Original script
+# ######################################
+
 # run update and upgrade, before running script
 # apt update && apt upgrade -y
 ## curl -L --silent https://bit.ly/31BE8PI <user> | bash
