@@ -31,12 +31,6 @@ if [[ "${EUID}" -ne 0 ]]; then
   exit 1
 fi
 
-
-# enable https repository
-cat <<EOF >/etc/apt/sources.list
-deb https://http.kali.org/kali kali-rolling main non-free contrib
-EOF
-
 compute_start_time(){
     start_time=$(date +%s)
     echo "\n\n Install started - $start_time \n" >> script.log
