@@ -45,26 +45,6 @@ compute_start_time(){
     echo "\n\n Install started - $start_time \n" >> script.log
 }
 
-printf "  ⏳  install & logon to nordvpn\n" | tee -a script.log
-    # ref:- https://www.ceos3c.com/linux/install-nordvpn-linux/
-    cd /home/kali/Downloads
-    wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
-    apt install /home/kali/Downloads/nordvpn-release_1.0.0_all.deb
-    apt update -y
-    apt install nordvpn -y
-    nordvpn login --token $TOKEN
-    nordvpn connect Double VPN
-    nordvpn s killswitch on
-    # #nordvpn connect "#656"
-    # #nordvpn -c -n "United States #3710"
-    # nordvpn connect --group Dedicated_IP Germany
-    printf '\n============================================================\n'
-    printf '[+] NordVPN NordVPN status\n'
-    nordvpn status
-    printf '============================================================\n\n'
-    sleep 5
-    
-
 configure_environment(){
     echo "HISTTIMEFORMAT='%m/%d/%y %T '" >> /root/.bashrc
 }
@@ -86,9 +66,8 @@ nordvpn() {
     nordvpn status
     printf '============================================================\n\n'
     sleep 5
-    
-    
 
+}
 
 apt_update() {  
     printf "  ⏳  apt update\n" | tee -a script.log
@@ -169,7 +148,8 @@ main () {
     configure_environment
     apt_update
     apt_upgrade
-    install_brave
+    nordvpn
+    #install_brave
     #install_mega
     gedit
     #terminator
