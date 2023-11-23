@@ -77,7 +77,10 @@ nordvpn() {
     sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)   # install nord client
     nordvpn login --token $TOKEN
     nordvpn set technology nordlynx
-    ./NordVpnToWireguard.sh
+    # ./NordVpnToWireguard.sh
+    # ./NordVpnToWireguard.sh --country Canada
+    # ./NordVpnToWireguard.sh --help
+    ./NordVpnToWireguard.sh --country Japan --city Tokyo
     printf '\n============================================================\n'
     printf '[+] NordVPN NordVPN status\n'
     nordvpn status
