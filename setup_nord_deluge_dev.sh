@@ -51,6 +51,7 @@ configure_environment(){
 
 nordvpn() {
     printf "  ⏳  install nordvpn with wireguard\n" | tee -a script.log
+    # Ref:- https://github.com/sfiorini/NordVPN-Wireguard/blob/master/README.md
     git clone https://github.com/sfiorini/NordVPN-Wireguard/blob/master/NordVpnToWireguard.sh
     chmod +x NordVpnToWireguard.sh
     sudo apt install wireguard curl jq net-tools   # install reqd packages
