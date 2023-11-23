@@ -5,7 +5,7 @@
 # Install --->> curl https://raw.githubusercontent.com/leighton-0/Kail_SetUp/main/setup_nord_deluge.sh | bash
 
 # ################################
-# Installs Nordvpn & deluge
+# Installs Nordvpn with wireguard settings & deluge
 # ################################
 
 user=kali
