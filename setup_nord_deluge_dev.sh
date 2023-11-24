@@ -141,13 +141,13 @@ main () {
     apt_update
     apt_upgrade
     nordvpn
-    #install_brave
+    install_brave
     #install_mega
     gedit
     #terminator
     deluge
-    #Auto_Random_Host_name
-    #auto_mac_spoof
+    Auto_Random_Host_name
+    auto_mac_spoof
     #install_add_WP_recon
     install_nano
     #manual_stuff_to_do
